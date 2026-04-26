@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Take Me There</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:         #080c14;
+  --bg-panel:   #050810;
+  --map-dim:    #0d1420;
+  --map-base:   #142030;
+  --map-hover:  #1e304c;
+  --map-sel:    #2a5090;
+  --border:     #121c2c;
+  --text-hi:    #bfcde0;
+  --text-lo:    #364860;
+  --text-mid:   #7898b8;
+  --accent:     #4a80c8;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text-hi);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ── Header ─────────────────────────────────────── */
+header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 11px 22px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.twin-kites-logo {
+  height: 28px;
+  width: auto;
+  opacity: 0.85;
+  filter: invert(1);
+}
+
+.copyright {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-lo);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.logo {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+#hint {
+  font-size: 12px;
+  color: var(--text-lo);
+  letter-spacing: 0.03em;
+  transition: color 0.15s;
+}
+
+/* ── Main layout ─────────────────────────────────── */
+main {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+/* ── Map ─────────────────────────────────────────── */
+#map-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 20px 20px;
+}
+
+#map { width: 100%; height: 100%; }
+#map svg { display: block; width: 100%; height: 100%; }
+
+.state {
+  fill: var(--map-base);
+  stroke: none;
+  cursor: pointer;
+  transition: fill 0.1s;
+}
+.state:hover { fill: var(--map-hover); }
+.state.sel    { fill: var(--map-sel); }
+
+.state.dim {
+  fill: var(--map-dim);
+  cursor: default;
+}
+.state.dim:hover { fill: var(--map-dim); }
+
+.borders-inner {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 0.7;
+  pointer-events: none;
+}
+.borders-outer {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1.2;
+  pointer-events: none;
+}
+
+/* ── Panel ───────────────────────────────────────── */
+#panel {
+  width: 390px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--border);
+  background: var(--bg-panel);
+  display: flex;
+  flex-direction: column;
+}
+#panel.closed { display: none; }
+
+#ph {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+#ph-state {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+#ph-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-hi);
+  margin-bottom: 2px;
+}
+#ph-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#ph-loc {
+  font-size: 11px;
+  color: var(--text-lo);
+}
+#ph-badge {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text-mid);
+  flex-shrink: 0;
+}
+
+.state-label {
+  font-size: 9px;
+  fill: #364860;
+  pointer-events: none;
+  user-select: none;
+}
+
+#pd {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #020408;
+}
+
+#pd iframe,
+#pd .cam-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+#pd .cam-img { object-fit: cover; }
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--text-lo);
+  text-align: center;
+  padding: 24px;
+  pointer-events: none;
+}
+.overlay.has-link { pointer-events: auto; }
+.overlay a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 11px;
+  padding: 5px 14px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  pointer-events: auto;
+}
+.overlay a:hover { background: var(--map-base); }
+.overlay.hide { display: none; }
+
+#pf {
+  padding: 9px 13px;
+  display: flex;
+  gap: 6px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+button {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-lo);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.1s;
+}
+button:hover:not(:disabled) {
+  background: var(--map-base);
+  color: var(--text-hi);
+  border-color: var(--text-mid);
+}
+button:disabled { opacity: 0.2; cursor: default; }
+
+#btn-another { flex: 1; }
+#btn-newt    { padding: 6px 11px; font-size: 13px; }
+#btn-close   { padding: 6px 11px; }
+#btn-random  { padding: 5px 13px; font-size: 11px; }
+
+/* ── Footer ──────────────────────────────────────── */
+footer {
+  flex-shrink: 0;
+  padding: 5px 22px;
+  border-top: 1px solid var(--border);
+}
+footer a {
+  font-size: 10px;
+  color: var(--text-lo);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+}
+footer a:hover { color: var(--text-mid); }
+
+/* ── Modal ───────────────────────────────────────── */
+#modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.72);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+#modal-overlay.open { display: flex; }
+#modal {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  max-width: 580px;
+  width: 100%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+#modal-hd {
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+#modal-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+#modal-body {
+  padding: 18px 20px;
+  overflow-y: auto;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--text-mid);
+}
+#modal-body h2 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-hi);
+  margin: 16px 0 5px;
+}
+#modal-body h2:first-child { margin-top: 0; }
+#modal-body a { color: var(--accent); }
+#modal-body .fine {
+  margin-top: 18px;
+  font-size: 10px;
+  color: var(--text-lo);
+}
+#btn-modal-close { padding: 4px 10px; font-size: 13px; }
+
+/* ── Search ──────────────────────────────────────── */
+#search-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+#search-inp {
+  width: 190px;
+  padding: 5px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-hi);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  outline: none;
+}
+#search-inp::placeholder { color: var(--text-lo); }
+#search-inp:focus { border-color: var(--text-mid); }
+#search-results {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 290px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  z-index: 60;
+  max-height: 300px;
+  overflow-y: auto;
+}
+#search-results.open { display: block; }
+.sr-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+}
+.sr-item:last-child { border-bottom: none; }
+.sr-item:hover, .sr-item.active { background: var(--map-base); }
+.sr-name { font-size: 12px; color: var(--text-hi); }
+.sr-loc  { font-size: 10px; color: var(--text-lo); margin-top: 2px; }
+
+/* ── Panel drag handle (mobile) ──────────────────── */
+#panel-handle {
+  display: none;
+  width: 36px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 10px auto 0;
+  flex-shrink: 0;
+}
+
+/* ── Mobile layout ───────────────────────────────── */
+@media (max-width: 640px) {
+  #hint, .copyright { display: none; }
+  header { padding: 8px 12px; gap: 10px; }
+  #search-inp { width: 130px; }
+  footer { display: none; }
+
+  #panel {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    width: 100% !important;
+    height: 62vh;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    border-radius: 12px 12px 0 0;
+    z-index: 50;
+    transform: translateY(100%);
+    transition: transform 0.28s ease;
+  }
+  #panel:not(.closed) { transform: translateY(0); }
+  #panel-handle { display: block; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <header>
+    <img src="1.svg" alt="Twin Kites" class="twin-kites-logo">
+    <span class="logo">Take Me There</span>
+    <span id="hint">Click a state to view a live webcam</span>
+    <div id="search-wrap">
+      <input id="search-inp" type="search" placeholder="Search cams…" autocomplete="off" spellcheck="false">
+      <div id="search-results"></div>
+    </div>
+    <button id="btn-random">Random</button>
+    <span class="copyright">© Twin Kites LLC</span>
+  </header>
+
+  <main>
+    <div id="map-wrap"><div id="map"></div></div>
+
+    <aside id="panel" class="closed">
+      <div id="panel-handle"></div>
+      <div id="ph">
+        <div id="ph-state"></div>
+        <div id="ph-name"></div>
+        <div id="ph-meta">
+          <span id="ph-loc"></span>
+          <span id="ph-badge"></span>
+        </div>
+      </div>
+      <div id="pd">
+        <div class="overlay" id="pd-load">Loading…</div>
+        <div class="overlay has-link hide" id="pd-err">
+          <span>Camera unavailable</span>
+          <a id="pd-link" href="#" target="_blank" rel="noopener noreferrer">Open in new tab ↗</a>
+          <a id="pd-gsv" href="#" target="_blank" rel="noopener noreferrer">View on Google Street View ↗</a>
+        </div>
+      </div>
+      <div id="pf">
+        <button id="btn-another" disabled>Another view</button>
+        <button id="btn-newt" title="Open in new tab">↗</button>
+        <button id="btn-close" title="Close">✕</button>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <a href="#" id="terms-link">Terms of Use</a>
+  </footer>
+
+</div>
+
+<div id="modal-overlay">
+  <div id="modal">
+    <div id="modal-hd">
+      <img src="1.svg" alt="Twin Kites" class="twin-kites-logo">
+      <span id="modal-title">Terms of Use</span>
+      <button id="btn-modal-close" title="Close">&#x2715;</button>
+    </div>
+    <div id="modal-body">
+      <p>Copyright &copy; Twin Kites LLC. All rights reserved. All original content, design, and code on this site are the property of Twin Kites LLC and may not be reproduced without written permission.</p>
+      <h2>No Warranty</h2>
+      <p>This site and all content are provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo; without warranty of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+      <h2>Third-Party Content</h2>
+      <p>Webcam feeds and live streams displayed on this site are sourced from third parties (including the National Park Service, YouTube, and other providers) and remain the property of their respective owners. Twin Kites LLC makes no representations regarding their accuracy, availability, or legality.</p>
+      <h2>Limitation of Liability</h2>
+      <p>In no event shall Twin Kites LLC be liable for any direct, indirect, incidental, or consequential damages arising from your use of, or inability to use, this site or any linked content.</p>
+      <h2>Privacy</h2>
+      <p>This site does not collect, store, or sell any personal information. No account registration or login is required. This site is hosted on GitHub Pages, which may collect limited technical data (such as IP addresses) subject to <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub&rsquo;s Privacy Statement</a>. Embedded third-party content (such as YouTube) may set cookies or collect data independently; their respective privacy policies apply.</p>
+      <h2>Accessibility</h2>
+      <p>Twin Kites LLC is committed to making this site accessible to all users. If you encounter an accessibility barrier, please contact us at <a href="mailto:twinkites@proton.me">twinkites@proton.me</a> so we may address it. This site is intended to conform to WCAG 2.1 Level AA guidelines where practicable.</p>
+      <p class="fine">Use of this site constitutes acceptance of these terms, which may be updated at any time without notice.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Inline fallback data — mirrors webcams.json (used when opened as file://) -->
+<script id="wdata" type="application/json">
+{
+  "AK": [
+    { "name": "Brooks Falls Bear Cam", "location": "Katmai National Park", "type": "youtube", "videoId": "73-EekdVVU8" },
+    { "name": "Bear & Salmon Live Cam", "location": "Katmai National Park", "type": "iframe", "url": "https://explore.org/livecams/brown-bears/brown-bear-salmon-cam-brooks-falls" }
+  ],
+  "AL": [
+    { "name": "Gulf State Park Beach", "location": "Gulf Shores, Alabama", "type": "youtube", "videoId": "bJonFHbwe04" },
+    { "name": "Dauphin Island Shorebirds", "location": "Dauphin Island Sea Lab, Alabama", "type": "iframe", "url": "https://explore.org/livecams/birds/dauphin-island-bird-banding-station" }
+  ],
+  "AR": [
+    { "name": "Steel Creek, Buffalo River", "location": "Buffalo National River", "type": "img", "url": "https://www.nps.gov/webcams-buff/steelecreek.jpg" },
+    { "name": "Ozark Highlands Wildlife", "location": "Ozark National Forest, Arkansas", "type": "youtube", "videoId": "pMrO8EZeHX8" }
+  ],
+  "AZ": [
+    { "name": "Bright Angel Trailhead", "location": "Grand Canyon National Park", "type": "img", "url": "https://cdn.pixelcaster.com/public.pixelcaster.com/snapshots/grandcanyon-1/latest.jpg" },
+    { "name": "Kolb Studio View", "location": "Grand Canyon National Park", "type": "img", "url": "https://cdn.pixelcaster.com/public.pixelcaster.com/snapshots/grandcanyon-2/latest.jpg" },
+    { "name": "Madera Canyon Hummingbirds", "location": "Santa Rita Mountains, Arizona", "type": "iframe", "url": "https://explore.org/livecams/hummingbirds/hummingbirds-in-madera-canyon-arizona" }
+  ],
+  "CA": [
+    { "name": "Merced River at Happy Isles", "location": "Yosemite National Park", "type": "img", "url": "https://usgs-nims-images.s3.amazonaws.com/overlay/CA_Merced_River_at_Happy_Isles_Bridge_Yosemite/CA_Merced_River_at_Happy_Isles_Bridge_Yosemite_newest.jpg" },
+    { "name": "Anacapa Ocean Cam", "location": "Channel Islands National Park", "type": "iframe", "url": "https://explore.org/livecams/oceans/channel-islands-national-park-anacapa-ocean" },
+    { "name": "Elephant Seal Rookery", "location": "Piedras Blancas, San Simeon", "type": "iframe", "url": "https://explore.org/livecams/seals-and-sea-lions/elephant-seal-rookery-piedras-blancas-california" },
+    { "name": "Anna's Hummingbird Nest", "location": "Live Oak, California", "type": "iframe", "url": "https://explore.org/livecams/hummingbirds/anna-s-hummingbird-nest-camera-2021" }
+  ],
+  "CO": [
+    { "name": "Longs Peak", "location": "Rocky Mountain National Park", "type": "img", "url": "https://www.nps.gov/webcams-romo/longs_peak.jpg" },
+    { "name": "Moraine Park Meadow", "location": "Rocky Mountain National Park", "type": "img", "url": "https://www.nps.gov/webcams-romo/moraine_park.jpg" },
+    { "name": "Rocky Mountain Elk", "location": "Estes Park, Colorado", "type": "youtube", "videoId": "JumhPSNd6qA" }
+  ],
+  "CT": [
+    { "name": "Hammonasset Beach State Park", "location": "Madison, Connecticut", "type": "youtube", "videoId": "QxmBEVIqJkA" },
+    { "name": "Great Blue Heron Colony", "location": "Connecticut Audubon Society", "type": "iframe", "url": "https://explore.org/livecams/birds/great-blue-heron-cam" }
+  ],
+  "DE": [
+    { "name": "Bombay Hook NWR Shorebirds", "location": "Bombay Hook NWR, Delaware", "type": "youtube", "videoId": "y5GikYMReqY" },
+    { "name": "Cape Henlopen State Park", "location": "Lewes, Delaware", "type": "youtube", "videoId": "JqCkG9kzHrE" }
+  ],
+  "FL": [
+    { "name": "Anhinga Trail", "location": "Everglades National Park", "type": "iframe", "url": "https://www.video-monitoring.com/everglades/royalpalm/" },
+    { "name": "Southwest Florida Eagle Cam", "location": "Southwest Florida", "type": "youtube", "videoId": "hs_Q99GpRxA" },
+    { "name": "Blue Spring Manatees", "location": "Blue Spring State Park, Florida", "type": "youtube", "videoId": "6LOKIbpRWQM" }
+  ],
+  "GA": [
+    { "name": "Okefenokee Swamp Wildlife", "location": "Okefenokee National Wildlife Refuge", "type": "youtube", "videoId": "JEHWm4K_IYI" },
+    { "name": "Cumberland Island Beach", "location": "Cumberland Island National Seashore", "type": "img", "url": "https://www.nps.gov/webcams-cuis/beach.jpg" }
+  ],
+  "HI": [
+    { "name": "Halema\u02bbuma\u02bbu Crater", "location": "Hawai\u02bbi Volcanoes National Park", "type": "img", "url": "https://volcanoes.usgs.gov/cams/V2cam/images/M.jpg" },
+    { "name": "K\u012blauea Eruption Live", "location": "Hawai\u02bbi Volcanoes National Park", "type": "youtube", "videoId": "jBv3FHMOTdA" },
+    { "name": "Laysan Albatross Nesting", "location": "K\u012blauea Point NWR, Kaua\u02bbi", "type": "iframe", "url": "https://explore.org/livecams/birds/laysan-albatross-nesting-cam" }
+  ],
+  "ID": [
+    { "name": "Craters of the Moon", "location": "Craters of the Moon National Monument", "type": "img", "url": "https://www.nps.gov/webcams-crmo/visitor_center.jpg" },
+    { "name": "Snake River Birds of Prey", "location": "Snake River Birds of Prey NCA, Idaho", "type": "youtube", "videoId": "fEhDeMF_xBo" }
+  ],
+  "IL": [
+    { "name": "Bald Eagle Watch", "location": "Starved Rock State Park, Illinois", "type": "youtube", "videoId": "YvhvVRiIJmE" },
+    { "name": "Chicago Lakefront", "location": "Chicago, Illinois", "type": "youtube", "videoId": "k1eHm0PNnjo" }
+  ],
+  "IN": [
+    { "name": "Indiana Dunes Lakeshore", "location": "Indiana Dunes National Park", "type": "img", "url": "https://www.nps.gov/webcams-indu/west_beach.jpg" },
+    { "name": "Jasper-Pulaski Sandhill Cranes", "location": "Jasper-Pulaski FWA, Indiana", "type": "youtube", "videoId": "YBWAP3oY3hs" }
+  ],
+  "IA": [
+    { "name": "Decorah Eagles North Nest", "location": "Decorah, Iowa", "type": "iframe", "url": "https://explore.org/livecams/raptor-resource-project/decorah-eagles-north-nest" },
+    { "name": "Decorah Eagle Hatchery Cam", "location": "Decorah, Iowa", "type": "iframe", "url": "https://explore.org/livecams/raptor-resource-project/decorah-eagles-hatchery-cam" }
+  ],
+  "KS": [
+    { "name": "Tallgrass Prairie Bison", "location": "Tallgrass Prairie National Preserve", "type": "img", "url": "https://www.nps.gov/webcams-tapr/bison_pasture.jpg" },
+    { "name": "Quivira Wetlands Wildlife", "location": "Quivira NWR, Kansas", "type": "youtube", "videoId": "1bPSMGQz0gU" }
+  ],
+  "KY": [
+    { "name": "Mammoth Cave Historic Entrance", "location": "Mammoth Cave National Park", "type": "img", "url": "https://www.nps.gov/webcams-maca/historic_entrance.jpg" },
+    { "name": "Red River Gorge Overlook", "location": "Daniel Boone National Forest, Kentucky", "type": "youtube", "videoId": "jM8bWPiJNIc" }
+  ],
+  "LA": [
+    { "name": "Roseate Spoonbill Colony", "location": "Atchafalaya Basin, Louisiana", "type": "youtube", "videoId": "HMVEbpFMRpA" },
+    { "name": "Bayou Sauvage Wildlife", "location": "Bayou Sauvage NWR, Louisiana", "type": "youtube", "videoId": "TtRqijxYRKQ" }
+  ],
+  "ME": [
+    { "name": "Jordan Pond", "location": "Acadia National Park", "type": "img", "url": "https://barharborcam.com/webcams/jordanpond/jordanpond.jpg" },
+    { "name": "Atlantic Puffin Watch", "location": "Seal Island NWR, Maine", "type": "iframe", "url": "https://explore.org/livecams/birds/puffin-watch" },
+    { "name": "Cadillac Mountain Summit", "location": "Acadia National Park", "type": "img", "url": "https://www.nps.gov/webcams-acad/cadillac_summit.jpg" }
+  ],
+  "MD": [
+    { "name": "Assateague Wild Ponies", "location": "Assateague Island National Seashore", "type": "youtube", "videoId": "FTWPUH2m0gg" },
+    { "name": "Chesapeake Bay Osprey", "location": "Eastern Shore, Maryland", "type": "iframe", "url": "https://explore.org/livecams/birds/chesapeake-bay-osprey-cam" }
+  ],
+  "MA": [
+    { "name": "Race Point Beach", "location": "Cape Cod National Seashore", "type": "img", "url": "https://www.nps.gov/webcams-caco/race_point.jpg" },
+    { "name": "Stellwagen Bank Whale Cam", "location": "Stellwagen Bank National Marine Sanctuary", "type": "youtube", "videoId": "sSyMOEeJhQs" }
+  ],
+  "MI": [
+    { "name": "Miners Beach, Lake Superior", "location": "Pictured Rocks National Lakeshore", "type": "img", "url": "https://www.nps.gov/webcams-piro/miners_beach.jpg" },
+    { "name": "Common Loon Nesting Cam", "location": "Upper Peninsula, Michigan", "type": "youtube", "videoId": "H8lxqKwSGm4" },
+    { "name": "Isle Royale Wolf & Moose", "location": "Isle Royale National Park", "type": "youtube", "videoId": "9F8-TroYALE" }
+  ],
+  "MN": [
+    { "name": "Boundary Waters Wildlife", "location": "BWCAW, Minnesota", "type": "youtube", "videoId": "lGqiO6rFGbg" },
+    { "name": "Common Loon Live Cam", "location": "Northwoods, Minnesota", "type": "youtube", "videoId": "H8lxqKwSGm4" },
+    { "name": "Voyageurs National Park", "location": "International Falls, Minnesota", "type": "img", "url": "https://www.nps.gov/webcams-voya/kabetogama_lake.jpg" }
+  ],
+  "MS": [
+    { "name": "Gulf Islands National Seashore", "location": "Ocean Springs, Mississippi", "type": "img", "url": "https://www.nps.gov/webcams-guis/ship_island.jpg" },
+    { "name": "Noxubee Refuge Wildlife", "location": "Noxubee NWR, Mississippi", "type": "youtube", "videoId": "g07Yzt39bMw" }
+  ],
+  "MO": [
+    { "name": "Gateway Arch Riverfront", "location": "St. Louis, Missouri", "type": "youtube", "videoId": "j6gRt2cElV8" },
+    { "name": "Current River, Ozarks", "location": "Ozark National Scenic Riverways", "type": "img", "url": "https://www.nps.gov/webcams-ozar/current_river.jpg" }
+  ],
+  "MT": [
+    { "name": "Lake McDonald", "location": "Glacier National Park", "type": "img", "url": "https://www.nps.gov/webcams-glac/LakeMcDonald1.jpg" },
+    { "name": "Logan Pass", "location": "Glacier National Park", "type": "img", "url": "https://glacier.org/webcam/hlt_nps.jpg" },
+    { "name": "Grizzly & Wolf Discovery Center", "location": "West Yellowstone, Montana", "type": "youtube", "videoId": "pWn0rQhfKpg" }
+  ],
+  "NE": [
+    { "name": "Sandhill Crane Migration", "location": "Rowe Sanctuary, Platte River", "type": "youtube", "videoId": "wDYrRVUPWRo" },
+    { "name": "Crane Cam, Wood River", "location": "Wood River, Nebraska", "type": "youtube", "videoId": "v8fD2_YCi50" }
+  ],
+  "NV": [
+    { "name": "Lehman Caves Entrance", "location": "Great Basin National Park", "type": "img", "url": "https://www.nps.gov/webcams-grba/lehman_caves.jpg" },
+    { "name": "Lake Tahoe South Shore", "location": "Lake Tahoe, Nevada", "type": "youtube", "videoId": "xY_Z1_L2ohs" }
+  ],
+  "NH": [
+    { "name": "Mount Washington Summit", "location": "White Mountains, New Hampshire", "type": "img", "url": "https://www.mountwashington.org/images/obs/webcam/current.jpg" },
+    { "name": "Squam Lake Loon Cam", "location": "Squam Lake, New Hampshire", "type": "youtube", "videoId": "GNNlxPmj3HA" }
+  ],
+  "NJ": [
+    { "name": "Cape May Hawk Watch", "location": "Cape May Point State Park, New Jersey", "type": "youtube", "videoId": "1fVVNJHE6FE" },
+    { "name": "Forsythe NWR Shorebirds", "location": "Edwin B. Forsythe NWR, New Jersey", "type": "youtube", "videoId": "yPUCCEfQqiE" }
+  ],
+  "NM": [
+    { "name": "White Sands Dunes Drive", "location": "White Sands National Park", "type": "img", "url": "https://www.nps.gov/webcams-whsa/dunes_drive.jpg" },
+    { "name": "Bosque del Apache Cranes", "location": "Bosque del Apache NWR, New Mexico", "type": "youtube", "videoId": "piNxmqjQuoM" }
+  ],
+  "NY": [
+    { "name": "Times Square", "location": "New York City", "type": "youtube", "videoId": "rnXIjl_Rzy4" },
+    { "name": "Niagara Falls", "location": "Niagara Falls, NY", "type": "youtube", "videoId": "qx7gry390YA" },
+    { "name": "Red-tailed Hawk Nest", "location": "Cornell Lab of Ornithology, Ithaca", "type": "iframe", "url": "https://explore.org/livecams/birds/cornell-lab-of-ornithology-red-tailed-hawk" }
+  ],
+  "NC": [
+    { "name": "Cape Hatteras Lighthouse", "location": "Cape Hatteras National Seashore", "type": "img", "url": "https://www.nps.gov/webcams-caha/cape_hatteras.jpg" },
+    { "name": "Blue Ridge Parkway Overlook", "location": "Blue Ridge Parkway, North Carolina", "type": "img", "url": "https://www.nps.gov/webcams-blri/pinn.jpg" },
+    { "name": "Black Bear Watch", "location": "Great Smoky Mountains National Park", "type": "youtube", "videoId": "uH3PlVeHqbA" }
+  ],
+  "ND": [
+    { "name": "Painted Canyon Overlook", "location": "Theodore Roosevelt National Park", "type": "img", "url": "https://www.nps.gov/webcams-thro/painted_canyon.jpg" },
+    { "name": "Prairie Bison Herd", "location": "Theodore Roosevelt National Park", "type": "youtube", "videoId": "FZ_wElxWjUw" }
+  ],
+  "OH": [
+    { "name": "Cuyahoga Valley Towpath", "location": "Cuyahoga Valley National Park", "type": "img", "url": "https://www.nps.gov/webcams-cuva/station.jpg" },
+    { "name": "Ottawa NWR Shorebirds", "location": "Ottawa National Wildlife Refuge, Ohio", "type": "youtube", "videoId": "6ORd9fPIi5E" }
+  ],
+  "OK": [
+    { "name": "Wichita Mountains Bison & Longhorn", "location": "Wichita Mountains NWR, Oklahoma", "type": "youtube", "videoId": "C6JGNKAyEEM" },
+    { "name": "Tallgrass Prairie Preserve", "location": "Pawhuska, Oklahoma", "type": "youtube", "videoId": "0tEO5xEdCFc" }
+  ],
+  "OR": [
+    { "name": "Sinnott Memorial Overlook", "location": "Crater Lake National Park", "type": "img", "url": "https://www.nps.gov/webcams-crla/camerasinnott.jpg" },
+    { "name": "Steller Sea Lion Colony", "location": "Sea Lion Caves, Florence", "type": "youtube", "videoId": "f2OTFUKGMdk" },
+    { "name": "Three Arch Rocks Seabirds", "location": "Three Arch Rocks NWR, Oregon", "type": "youtube", "videoId": "p8-cUSFRPHI" }
+  ],
+  "PA": [
+    { "name": "Hawk Mountain Raptor Watch", "location": "Hawk Mountain Sanctuary, Pennsylvania", "type": "youtube", "videoId": "L-V2Lw5plcs" },
+    { "name": "Pennsylvania Bald Eagle Nest", "location": "Codorus State Park, Pennsylvania", "type": "youtube", "videoId": "hs_Q99GpRxA" }
+  ],
+  "RI": [
+    { "name": "Newport Harbor", "location": "Newport, Rhode Island", "type": "youtube", "videoId": "D7cTaGW0k2Y" },
+    { "name": "Block Island Wildlife Refuge", "location": "Block Island NWR, Rhode Island", "type": "youtube", "videoId": "h5YEFsmDNF0" }
+  ],
+  "SC": [
+    { "name": "ACE Basin Alligators & Wading Birds", "location": "ACE Basin NWR, South Carolina", "type": "youtube", "videoId": "qpAfbIxR62s" },
+    { "name": "Cape Romain Shorebirds", "location": "Cape Romain NWR, South Carolina", "type": "youtube", "videoId": "K2uqrFHDEFk" }
+  ],
+  "SD": [
+    { "name": "Badlands Prairie Dog Town", "location": "Badlands National Park", "type": "img", "url": "https://www.nps.gov/webcams-badl/prairie_dog.jpg" },
+    { "name": "Custer State Park Bison", "location": "Custer State Park, South Dakota", "type": "youtube", "videoId": "6rNQOmJFpBc" }
+  ],
+  "TN": [
+    { "name": "Newfound Gap", "location": "Great Smoky Mountains National Park", "type": "iframe", "url": "https://grsmnfgap.air-resource.net/" },
+    { "name": "Smokies Black Bear Cam", "location": "Great Smoky Mountains National Park", "type": "youtube", "videoId": "uH3PlVeHqbA" }
+  ],
+  "TX": [
+    { "name": "Panther Junction", "location": "Big Bend National Park", "type": "img", "url": "https://www.nps.gov/featurecontent/ard/webcams/images/bibelarge.jpg" },
+    { "name": "Aransas Whooping Cranes", "location": "Aransas NWR, Texas", "type": "youtube", "videoId": "Rl6_HRkXmYY" },
+    { "name": "High Island Heron & Egret Colony", "location": "High Island, Texas", "type": "youtube", "videoId": "6gFijBIq1uM" }
+  ],
+  "UT": [
+    { "name": "Temples and Towers of the Virgin", "location": "Zion National Park", "type": "img", "url": "https://www.nps.gov/webcams-zion/camera2.jpg" },
+    { "name": "Arches Entrance", "location": "Arches National Park", "type": "img", "url": "https://udottraffic.utah.gov/1_devices/aux16852.jpeg" },
+    { "name": "Bryce Canyon Sunrise Point", "location": "Bryce Canyon National Park", "type": "img", "url": "https://www.nps.gov/webcams-brca/sunrise.jpg" }
+  ],
+  "VT": [
+    { "name": "Mount Mansfield Summit", "location": "Stowe Mountain Resort, Vermont", "type": "img", "url": "https://www.stowe.com/content/dam/stowe/images/mountain/MtMansfieldSummitWebcam.jpg" },
+    { "name": "Vermont Common Loon", "location": "Groton Pond, Vermont", "type": "youtube", "videoId": "GNNlxPmj3HA" }
+  ],
+  "VA": [
+    { "name": "Big Meadows", "location": "Shenandoah National Park", "type": "img", "url": "https://www.nps.gov/webcams-shen/bvc2.jpg" },
+    { "name": "Chincoteague Wild Ponies", "location": "Chincoteague NWR, Virginia", "type": "youtube", "videoId": "FTWPUH2m0gg" }
+  ],
+  "WA": [
+    { "name": "Mountain View", "location": "Mount Rainier National Park", "type": "img", "url": "https://www.nps.gov/webcams-mora/mountain.jpg" },
+    { "name": "Longmire", "location": "Mount Rainier National Park", "type": "img", "url": "https://www.nps.gov/webcams-mora/longmire.jpg" },
+    { "name": "Tatoosh Range", "location": "Mount Rainier National Park", "type": "img", "url": "https://www.nps.gov/webcams-mora/tatoosh.jpg" },
+    { "name": "Orca Live \u2014 Salish Sea", "location": "San Juan Island, Washington", "type": "youtube", "videoId": "nEMhPnjT350" }
+  ],
+  "WV": [
+    { "name": "New River Gorge Grand View", "location": "New River Gorge National Park", "type": "img", "url": "https://www.nps.gov/webcams-neri/grandview.jpg" },
+    { "name": "Cranberry Glades Wildlife", "location": "Monongahela National Forest, WV", "type": "youtube", "videoId": "aCNHgbZLtk0" }
+  ],
+  "WI": [
+    { "name": "Apostle Islands Sea Caves", "location": "Apostle Islands National Lakeshore", "type": "img", "url": "https://www.nps.gov/webcams-apis/sea_caves.jpg" },
+    { "name": "Sandhill Crane Festival", "location": "International Crane Foundation, Baraboo", "type": "youtube", "videoId": "RwXv4TCkK_Q" },
+    { "name": "Northwoods Black Bear Cam", "location": "Northwoods, Wisconsin", "type": "youtube", "videoId": "pWn0rQhfKpg" }
+  ],
+  "WY": [
+    { "name": "Old Faithful Geyser", "location": "Yellowstone National Park", "type": "youtube", "videoId": "BWnloy8r0qU" },
+    { "name": "Mammoth Hot Springs", "location": "Yellowstone National Park", "type": "img", "url": "https://www.nps.gov/webcams-yell/mammoth_parade.jpg" },
+    { "name": "West Entrance", "location": "Yellowstone National Park", "type": "img", "url": "https://www.nps.gov/webcams-yell/west_gate.jpg" },
+    { "name": "Grand Teton Oxbow Bend", "location": "Grand Teton National Park", "type": "img", "url": "https://www.nps.gov/webcams-grte/oxbow.jpg" }
+  ]
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script>
+
+const FIPS = {
+  "01":{ name:"Alabama",              abbr:"AL" },
+  "02":{ name:"Alaska",               abbr:"AK" },
+  "04":{ name:"Arizona",              abbr:"AZ" },
+  "05":{ name:"Arkansas",             abbr:"AR" },
+  "06":{ name:"California",           abbr:"CA" },
+  "08":{ name:"Colorado",             abbr:"CO" },
+  "09":{ name:"Connecticut",          abbr:"CT" },
+  "10":{ name:"Delaware",             abbr:"DE" },
+  "11":{ name:"District of Columbia", abbr:"DC" },
+  "12":{ name:"Florida",              abbr:"FL" },
+  "13":{ name:"Georgia",              abbr:"GA" },
+  "15":{ name:"Hawaii",               abbr:"HI" },
+  "16":{ name:"Idaho",                abbr:"ID" },
+  "17":{ name:"Illinois",             abbr:"IL" },
+  "18":{ name:"Indiana",              abbr:"IN" },
+  "19":{ name:"Iowa",                 abbr:"IA" },
+  "20":{ name:"Kansas",               abbr:"KS" },
+  "21":{ name:"Kentucky",             abbr:"KY" },
+  "22":{ name:"Louisiana",            abbr:"LA" },
+  "23":{ name:"Maine",                abbr:"ME" },
+  "24":{ name:"Maryland",             abbr:"MD" },
+  "25":{ name:"Massachusetts",        abbr:"MA" },
+  "26":{ name:"Michigan",             abbr:"MI" },
+  "27":{ name:"Minnesota",            abbr:"MN" },
+  "28":{ name:"Mississippi",          abbr:"MS" },
+  "29":{ name:"Missouri",             abbr:"MO" },
+  "30":{ name:"Montana",              abbr:"MT" },
+  "31":{ name:"Nebraska",             abbr:"NE" },
+  "32":{ name:"Nevada",               abbr:"NV" },
+  "33":{ name:"New Hampshire",        abbr:"NH" },
+  "34":{ name:"New Jersey",           abbr:"NJ" },
+  "35":{ name:"New Mexico",           abbr:"NM" },
+  "36":{ name:"New York",             abbr:"NY" },
+  "37":{ name:"North Carolina",       abbr:"NC" },
+  "38":{ name:"North Dakota",         abbr:"ND" },
+  "39":{ name:"Ohio",                 abbr:"OH" },
+  "40":{ name:"Oklahoma",             abbr:"OK" },
+  "41":{ name:"Oregon",               abbr:"OR" },
+  "42":{ name:"Pennsylvania",         abbr:"PA" },
+  "44":{ name:"Rhode Island",         abbr:"RI" },
+  "45":{ name:"South Carolina",       abbr:"SC" },
+  "46":{ name:"South Dakota",         abbr:"SD" },
+  "47":{ name:"Tennessee",            abbr:"TN" },
+  "48":{ name:"Texas",                abbr:"TX" },
+  "49":{ name:"Utah",                 abbr:"UT" },
+  "50":{ name:"Vermont",              abbr:"VT" },
+  "51":{ name:"Virginia",             abbr:"VA" },
+  "53":{ name:"Washington",           abbr:"WA" },
+  "54":{ name:"West Virginia",        abbr:"WV" },
+  "55":{ name:"Wisconsin",            abbr:"WI" },
+  "56":{ name:"Wyoming",              abbr:"WY" }
+};
+
+let cams      = {};
+let cur       = null; // { state, idx }
+let tick      = null; // image refresh timer
+let mapSvg    = null;
+let ytPlayer  = null;
+let ytApiReady = false;
+const ytApiQueue = [];
+
+window.onYouTubeIframeAPIReady = function() {
+  ytApiReady = true;
+  ytApiQueue.forEach(fn => fn());
+  ytApiQueue.length = 0;
+};
+
+// Dynamically load YouTube IFrame API
+(function() {
+  const s = document.createElement('script');
+  s.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(s);
+})();
+
+let failedCams = {}; // abbr -> Set of failed indices
+
+const STATE_COORDS = {
+  AK: [63.0695, -151.0074], AL: [32.3617,  -86.2792], AR: [34.7465,  -92.2896],
+  AZ: [36.0544, -112.1401], CA: [37.8651, -119.5383], CO: [39.5501, -105.7821],
+  CT: [41.7658,  -72.6851], DE: [39.1582,  -75.5244], FL: [25.4687,  -80.9300],
+  GA: [33.7490,  -84.3880], HI: [19.4194, -155.2885], ID: [43.6150, -116.2023],
+  IL: [41.8781,  -87.6298], IN: [39.7684,  -86.1581], IA: [41.5868,  -93.6250],
+  KS: [39.0119,  -98.4842], KY: [37.8393,  -84.2700], LA: [29.9511,  -90.0715],
+  ME: [44.3386,  -68.2733], MD: [39.2904,  -76.6122], MA: [42.3601,  -71.0589],
+  MI: [46.8625,  -85.9083], MN: [44.9778,  -93.2650], MS: [30.3674,  -89.0928],
+  MO: [38.6270,  -90.1994], MT: [48.5884, -113.9980], NE: [40.8136,  -96.7026],
+  NV: [36.1699, -115.1398], NH: [44.2706,  -71.3033], NJ: [40.7488,  -74.0045],
+  NM: [35.6870, -105.9378], NY: [40.7580,  -73.9855], NC: [35.5951,  -82.5515],
+  ND: [46.8772, -103.0096], OH: [41.4993,  -81.6944], OK: [35.4676,  -97.5164],
+  OR: [42.9446, -122.1090], PA: [39.9526,  -75.1652], RI: [41.8240,  -71.4128],
+  SC: [32.7765,  -79.9311], SD: [43.8791, -103.4591], TN: [35.6532,  -83.5070],
+  TX: [29.7604,  -95.3698], UT: [37.2982, -113.0263], VT: [44.4759,  -73.2121],
+  VA: [38.8976,  -77.0366], WA: [46.8523, -121.7603], WV: [37.8332,  -80.8324],
+  WI: [46.8787,  -90.7296], WY: [44.4280, -110.5885],
+};
+
+async function loadCams() {
+  try {
+    const r = await fetch('webcams.json');
+    if (!r.ok) throw new Error();
+    return await r.json();
+  } catch {
+    return JSON.parse(document.getElementById('wdata').textContent);
+  }
+}
+
+(async () => {
+  cams = await loadCams();
+  initMap();
+})();
+
+// ── Map ────────────────────────────────────────────────────────────────────
+
+function initMap() {
+  const svg = d3.select('#map')
+    .append('svg')
+    .attr('viewBox', '0 0 960 600')
+    .attr('preserveAspectRatio', 'xMidYMid meet');
+
+  mapSvg = svg;
+
+  const proj = d3.geoAlbersUsa().scale(1300).translate([487, 305]);
+  const path = d3.geoPath().projection(proj);
+
+  d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
+    const features = topojson.feature(us, us.objects.states).features;
+
+    svg.append('g')
+      .selectAll('path')
+      .data(features)
+      .join('path')
+      .attr('d', path)
+      .attr('class', d => {
+        const st = FIPS[String(d.id).padStart(2, '0')];
+        return (st && cams[st.abbr]?.length) ? 'state' : 'state dim';
+      })
+      .on('mouseenter', (_, d) => {
+        const st = FIPS[String(d.id).padStart(2, '0')];
+        if (st && cams[st.abbr]?.length) hint(st.name);
+      })
+      .on('mouseleave', () => hint(cur ? cur.state.name : 'Click a state to view a live webcam'))
+      .on('click', (_, d) => {
+        const st = FIPS[String(d.id).padStart(2, '0')];
+        if (!st || !cams[st.abbr]?.length) return;
+        pickState(st);
+      });
+
+    // Interior borders
+    svg.append('path')
+      .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
+      .attr('class', 'borders-inner')
+      .attr('d', path);
+
+    // Outer border
+    svg.append('path')
+      .datum(topojson.mesh(us, us.objects.states, (a, b) => a === b))
+      .attr('class', 'borders-outer')
+      .attr('d', path);
+
+    // State abbreviation labels
+    svg.append('g')
+      .selectAll('text')
+      .data(features)
+      .join('text')
+      .attr('class', 'state-label')
+      .attr('transform', d => {
+        const st = FIPS[String(d.id).padStart(2, '0')];
+        if (!st || st.abbr === 'DC') return 'translate(-999,-999)';
+        const c = path.centroid(d);
+        return isNaN(c[0]) ? 'translate(-999,-999)' : `translate(${c})`;
+      })
+      .attr('text-anchor', 'middle')
+      .attr('dominant-baseline', 'central')
+      .text(d => {
+        const st = FIPS[String(d.id).padStart(2, '0')];
+        return st ? st.abbr : '';
+      });
+  });
+}
+
+function pickState(st) {
+  if (mapSvg) {
+    mapSvg.selectAll('.state.sel').classed('sel', false);
+    mapSvg.selectAll('.state').filter(d => {
+      return FIPS[String(d.id).padStart(2, '0')]?.abbr === st.abbr;
+    }).classed('sel', true);
+  }
+  failedCams[st.abbr] = new Set();
+  const idx = Math.floor(Math.random() * cams[st.abbr].length);
+  cur = { state: st, idx };
+  renderPanel();
+  hint(st.name);
+}
+
+// ── Panel ──────────────────────────────────────────────────────────────────
+
+function renderPanel() {
+  if (!cur) return;
+  const { state, idx } = cur;
+  const cam = cams[state.abbr][idx];
+
+  document.getElementById('ph-state').textContent = state.name;
+  document.getElementById('ph-name').textContent  = cam.name;
+  document.getElementById('ph-loc').textContent   = cam.location || '';
+  const badgeMap = { youtube: 'YT', img: 'IMG', iframe: 'LIVE' };
+  document.getElementById('ph-badge').textContent = badgeMap[cam.type] || '';
+
+  document.getElementById('panel').classList.remove('closed');
+  document.getElementById('btn-another').disabled = cams[state.abbr].length <= 1;
+
+  clearDisplay();
+  showLoad(true);
+  showErr(false);
+
+  const camUrl = cam.type === 'youtube'
+    ? `https://www.youtube.com/embed/${cam.videoId}?autoplay=1&mute=1`
+    : cam.url;
+
+  document.getElementById('btn-newt').onclick = () => window.open(camUrl, '_blank', 'noopener');
+
+  const pd = document.getElementById('pd');
+
+  if (cam.type === 'youtube') {
+    const div = mk('div');
+    div.style.cssText = 'position:absolute;inset:0;width:100%;height:100%';
+    pd.appendChild(div);
+    const create = () => {
+      ytPlayer = new YT.Player(div, {
+        videoId: cam.videoId,
+        width: '100%',
+        height: '100%',
+        playerVars: { autoplay: 1, mute: 1, rel: 0, playsinline: 1 },
+        events: {
+          onReady: () => showLoad(false),
+          onError:  () => advanceCam(),
+        },
+      });
+    };
+    if (ytApiReady) create(); else ytApiQueue.push(create);
+
+  } else if (cam.type === 'img') {
+    const img = mk('img');
+    img.className = 'cam-img';
+    img.onload  = () => showLoad(false);
+    img.onerror = () => { showLoad(false); showErr(true, cam.url); };
+    setImgSrc(img, cam.url);
+    pd.appendChild(img);
+    tick = setInterval(() => setImgSrc(img, cam.url), 30_000);
+
+  } else { // iframe
+    const f = mk('iframe');
+    f.src = cam.url;
+    f.allow = 'autoplay; fullscreen';
+    f.onload = () => showLoad(false);
+    pd.appendChild(f);
+    // iframes blocked by X-Frame-Options show no error; dismiss loading after timeout
+    setTimeout(() => showLoad(false), 5_000);
+  }
+}
+
+function setImgSrc(img, url) {
+  const sep = url.includes('?') ? '&' : '?';
+  img.src = `${url}${sep}_t=${Date.now()}`;
+}
+
+function clearDisplay() {
+  if (tick) { clearInterval(tick); tick = null; }
+  if (ytPlayer) { try { ytPlayer.destroy(); } catch(e) {} ytPlayer = null; }
+  const pd = document.getElementById('pd');
+  [...pd.children].forEach(c => {
+    if (c.id !== 'pd-load' && c.id !== 'pd-err') c.remove();
+  });
+}
+
+function advanceCam() {
+  if (!cur) return;
+  const { state } = cur;
+  if (!failedCams[state.abbr]) failedCams[state.abbr] = new Set();
+  failedCams[state.abbr].add(cur.idx);
+
+  const available = cams[state.abbr]
+    .map((_, i) => i)
+    .filter(i => !failedCams[state.abbr].has(i));
+
+  if (available.length > 0) {
+    cur.idx = available[Math.floor(Math.random() * available.length)];
+    renderPanel();
+  } else {
+    showStreetView(state);
+  }
+}
+
+function showStreetView(state) {
+  const coords = STATE_COORDS[state.abbr];
+  if (!coords) return;
+  const [lat, lng] = coords;
+
+  document.getElementById('ph-name').textContent  = 'Street View';
+  document.getElementById('ph-loc').textContent   = state.name;
+  document.getElementById('ph-badge').textContent = 'GSV';
+
+  clearDisplay();
+  showLoad(true);
+  showErr(false);
+
+  const f = mk('iframe');
+  f.src = `https://www.google.com/maps?q=&layer=c&cbll=${lat},${lng}&cbp=12,0,0,0,0&output=embed`;
+  f.allow = 'fullscreen';
+  f.onload = () => showLoad(false);
+  document.getElementById('pd').appendChild(f);
+  setTimeout(() => showLoad(false), 6_000);
+
+  document.getElementById('btn-newt').onclick = () =>
+    window.open(`https://www.google.com/maps?layer=c&cbll=${lat},${lng}`, '_blank', 'noopener');
+}
+
+function showLoad(v) {
+  document.getElementById('pd-load').classList.toggle('hide', !v);
+}
+
+function showErr(v, url = '') {
+  document.getElementById('pd-err').classList.toggle('hide', !v);
+  if (url) document.getElementById('pd-link').href = url;
+  if (v && cur) {
+    const coords = STATE_COORDS[cur.state.abbr];
+    if (coords) {
+      const [lat, lng] = coords;
+      document.getElementById('pd-gsv').href =
+        `https://www.google.com/maps?layer=c&cbll=${lat},${lng}`;
+      document.getElementById('pd-gsv').style.display = '';
+    } else {
+      document.getElementById('pd-gsv').style.display = 'none';
+    }
+  }
+}
+
+function hint(text) {
+  document.getElementById('hint').textContent = text;
+}
+
+function mk(tag) { return document.createElement(tag); }
+
+// ── Buttons ────────────────────────────────────────────────────────────────
+
+document.getElementById('btn-another').addEventListener('click', () => {
+  if (!cur) return;
+  const all = cams[cur.state.abbr];
+  let idx;
+  do { idx = Math.floor(Math.random() * all.length); }
+  while (all.length > 1 && idx === cur.idx);
+  cur.idx = idx;
+  renderPanel();
+});
+
+const modalOverlay = document.getElementById('modal-overlay');
+document.getElementById('terms-link').addEventListener('click', e => {
+  e.preventDefault();
+  modalOverlay.classList.add('open');
+});
+document.getElementById('btn-modal-close').addEventListener('click', () => {
+  modalOverlay.classList.remove('open');
+});
+modalOverlay.addEventListener('click', e => {
+  if (e.target === modalOverlay) modalOverlay.classList.remove('open');
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') modalOverlay.classList.remove('open');
+});
+
+// ── Search ─────────────────────────────────────────────────────────────────
+
+const searchInp     = document.getElementById('search-inp');
+const searchResults = document.getElementById('search-results');
+
+function searchCams(q) {
+  q = q.toLowerCase().trim();
+  if (!q) return [];
+  const results = [];
+  for (const [abbr, camList] of Object.entries(cams)) {
+    const st = Object.values(FIPS).find(f => f.abbr === abbr);
+    if (!st) continue;
+    for (let i = 0; i < camList.length; i++) {
+      const cam = camList[i];
+      const hay = `${st.name} ${abbr} ${cam.name} ${cam.location || ''}`.toLowerCase();
+      if (hay.includes(q)) {
+        results.push({ state: st, idx: i, cam });
+        if (results.length >= 8) return results;
+      }
+    }
+  }
+  return results;
+}
+
+function renderSearch(results) {
+  if (!results.length) { searchResults.classList.remove('open'); return; }
+  searchResults.innerHTML = results.map((r, i) => `
+    <div class="sr-item" data-i="${i}">
+      <div class="sr-name">${r.cam.name}</div>
+      <div class="sr-loc">${r.state.name}${r.cam.location ? ' · ' + r.cam.location : ''}</div>
+    </div>`).join('');
+  searchResults.classList.add('open');
+  searchResults.querySelectorAll('.sr-item').forEach((el, i) => {
+    el.addEventListener('mousedown', e => {
+      e.preventDefault();
+      const r = results[i];
+      cur = { state: r.state, idx: r.idx };
+      pickState(r.state);
+      closeSearch();
+    });
+  });
+}
+
+function closeSearch() {
+  searchResults.classList.remove('open');
+  searchInp.value = '';
+}
+
+searchInp.addEventListener('input', () => renderSearch(searchCams(searchInp.value)));
+searchInp.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+document.addEventListener('click', e => {
+  if (!e.target.closest('#search-wrap')) closeSearch();
+});
+
+document.getElementById('btn-random').addEventListener('click', () => {
+  const abbrs = Object.keys(cams).filter(a => cams[a].length);
+  const abbr  = abbrs[Math.floor(Math.random() * abbrs.length)];
+  const st    = Object.values(FIPS).find(f => f.abbr === abbr);
+  if (st) pickState(st);
+});
+
+document.getElementById('btn-close').addEventListener('click', () => {
+  clearDisplay();
+  document.getElementById('panel').classList.add('closed');
+  d3.selectAll('.state.sel').classed('sel', false);
+  cur = null;
+  hint('Click a state to view a live webcam');
+});
+
+</script>
+</body>
+</html>

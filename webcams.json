@@ -1,0 +1,1512 @@
+{
+  "AK": [
+    {
+      "name": "Brooks Falls Bear Cam",
+      "location": "Katmai National Park",
+      "type": "youtube",
+      "videoId": "73-EekdVVU8"
+    },
+    {
+      "name": "Bear & Salmon Live Cam",
+      "location": "Katmai National Park",
+      "type": "iframe",
+      "url": "https://explore.org/livecams/brown-bears/brown-bear-salmon-cam-brooks-falls"
+    },
+    {
+      "name": "Brooks Falls Bearcam",
+      "location": "Katmai National Park & Preserve",
+      "type": "youtube",
+      "videoId": "lR0XJsz7_dc"
+    },
+    {
+      "name": "Dumpling Mountain Cam",
+      "location": "Katmai National Park & Preserve",
+      "type": "youtube",
+      "videoId": "r0cwB9l-zy0"
+    },
+    {
+      "name": "Kennecott Mill and Mt. Blackburn",
+      "location": "Wrangell - St Elias National Park & Preserve",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-wrst/KennecottNorth.jpg"
+    },
+    {
+      "name": "Kennicott Glacier and the Chugach Range",
+      "location": "Wrangell - St Elias National Park & Preserve",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-wrst/KennecottSouth.jpg"
+    },
+    {
+      "name": "Bartlett Cove Dock and Tlingit Trail",
+      "location": "Glacier Bay National Park & Preserve",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glba/TlingitTrail.jpg"
+    },
+    {
+      "name": "Lower Glacier Bay",
+      "location": "Glacier Bay National Park & Preserve",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glba/LowerBay.jpg"
+    },
+    {
+      "name": "Bartlett Cove Lagoon and Fairweather Range",
+      "location": "Glacier Bay National Park & Preserve",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glba/BartlettLagoon.jpg"
+    },
+    {
+      "name": "Bartlett Cove Public Dock",
+      "location": "Glacier Bay National Park & Preserve",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glba/BartlettDock.jpg"
+    },
+    {
+      "name": "River Watch Cam",
+      "location": "Katmai National Park & Preserve",
+      "type": "youtube",
+      "videoId": "mWIzpiBM2yY"
+    },
+    {
+      "name": "Wrangell Mountains from Park Headquarters",
+      "location": "Wrangell - St Elias National Park & Preserve",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-wrst/HQVC.jpg"
+    },
+    {
+      "name": "Naknek River Cam",
+      "location": "Katmai National Park & Preserve",
+      "type": "youtube",
+      "videoId": "pHCaRGbvXtE"
+    },
+    {
+      "name": "Riffles BearCam",
+      "location": "Katmai National Park & Preserve",
+      "type": "youtube",
+      "videoId": "veh0gN3NyRk"
+    }
+  ],
+  "AL": [
+    {
+      "name": "Gulf State Park Beach",
+      "location": "Gulf Shores, Alabama",
+      "type": "youtube",
+      "videoId": "bJonFHbwe04"
+    },
+    {
+      "name": "Dauphin Island Shorebirds",
+      "location": "Dauphin Island Sea Lab, Alabama",
+      "type": "iframe",
+      "url": "https://explore.org/livecams/birds/dauphin-island-bird-banding-station"
+    }
+  ],
+  "AR": [
+    {
+      "name": "Steel Creek, Buffalo River",
+      "location": "Buffalo National River",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-buff/steelecreek.jpg"
+    },
+    {
+      "name": "Ozark Highlands Wildlife",
+      "location": "Ozark National Forest, Arkansas",
+      "type": "youtube",
+      "videoId": "pMrO8EZeHX8"
+    }
+  ],
+  "AZ": [
+    {
+      "name": "Bright Angel Trailhead",
+      "location": "Grand Canyon National Park",
+      "type": "img",
+      "url": "https://cdn.pixelcaster.com/public.pixelcaster.com/snapshots/grandcanyon-1/latest.jpg"
+    },
+    {
+      "name": "Kolb Studio View",
+      "location": "Grand Canyon National Park",
+      "type": "img",
+      "url": "https://cdn.pixelcaster.com/public.pixelcaster.com/snapshots/grandcanyon-2/latest.jpg"
+    },
+    {
+      "name": "Madera Canyon Hummingbirds",
+      "location": "Santa Rita Mountains, Arizona",
+      "type": "iframe",
+      "url": "https://explore.org/livecams/hummingbirds/hummingbirds-in-madera-canyon-arizona"
+    },
+    {
+      "name": "South Entrance Station",
+      "location": "Grand Canyon National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-grca/camera.jpg"
+    },
+    {
+      "name": "Stateline Auxiliary Launch Ramp",
+      "location": "Glen Canyon National Recreation Area",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glca/ww3.jpg"
+    },
+    {
+      "name": "Paria Overlook",
+      "location": "Glen Canyon National Recreation Area",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glca/po1.jpg"
+    },
+    {
+      "name": "Wahweap Main Launch Ramp",
+      "location": "Glen Canyon National Recreation Area",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glca/ww2.jpg"
+    }
+  ],
+  "CA": [
+    {
+      "name": "Merced River at Happy Isles",
+      "location": "Yosemite National Park",
+      "type": "img",
+      "url": "https://usgs-nims-images.s3.amazonaws.com/overlay/CA_Merced_River_at_Happy_Isles_Bridge_Yosemite/CA_Merced_River_at_Happy_Isles_Bridge_Yosemite_newest.jpg"
+    },
+    {
+      "name": "Anacapa Ocean Cam",
+      "location": "Channel Islands National Park",
+      "type": "iframe",
+      "url": "https://explore.org/livecams/oceans/channel-islands-national-park-anacapa-ocean"
+    },
+    {
+      "name": "Elephant Seal Rookery",
+      "location": "Piedras Blancas, San Simeon",
+      "type": "iframe",
+      "url": "https://explore.org/livecams/seals-and-sea-lions/elephant-seal-rookery-piedras-blancas-california"
+    },
+    {
+      "name": "Anna's Hummingbird Nest",
+      "location": "Live Oak, California",
+      "type": "iframe",
+      "url": "https://explore.org/livecams/hummingbirds/anna-s-hummingbird-nest-camera-2021"
+    },
+    {
+      "name": "Bald Hills & Redwood Creek",
+      "location": "Redwood National and State Parks",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-redw/Bald_Hills.jpg"
+    },
+    {
+      "name": "Jedediah Smith Redwoods State Park",
+      "location": "Redwood National and State Parks",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-redw/Jed_Smith.jpg"
+    },
+    {
+      "name": "Thomas H. Kuchel Visitor Center",
+      "location": "Redwood National and State Parks",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-redw/KVC_Pacific_Ocean.jpg"
+    },
+    {
+      "name": "Channel Islands Live Broadcasts",
+      "location": "Channel Islands National Park",
+      "type": "youtube",
+      "videoId": "fduuCS3xToE"
+    },
+    {
+      "name": "San Miguel Island Ranger Station Webcam",
+      "location": "Channel Islands National Park",
+      "type": "youtube",
+      "videoId": "OtbWimuJQ_A"
+    },
+    {
+      "name": "Peregrine Falcon Webcam",
+      "location": "Channel Islands National Park",
+      "type": "youtube",
+      "videoId": "YmZv8Pfwum4"
+    },
+    {
+      "name": "Half Dome",
+      "location": "Yosemite National Park",
+      "type": "img",
+      "url": "https://pixelcaster.com/yosemite/webcams/ahwahnee2.jpg"
+    },
+    {
+      "name": "El Capitan",
+      "location": "Yosemite National Park",
+      "type": "img",
+      "url": "https://pixelcaster.com/yosemite/webcams/turtleback.jpg"
+    },
+    {
+      "name": "Bald Eagle Webcam (Sauces Canyon Nest)",
+      "location": "Channel Islands National Park",
+      "type": "youtube",
+      "videoId": "rnTsOesC6hE"
+    },
+    {
+      "name": "Bald Eagle Webcam (Fraser Point Nest)",
+      "location": "Channel Islands National Park",
+      "type": "youtube",
+      "videoId": "OY4V_AppZ6s"
+    },
+    {
+      "name": "Ocean Webcam",
+      "location": "Channel Islands National Park",
+      "type": "youtube",
+      "videoId": "OAJF1Ie1m_Q"
+    },
+    {
+      "name": "Anacapa Island Webcam",
+      "location": "Channel Islands National Park",
+      "type": "youtube",
+      "videoId": "aaUERtNMn7o"
+    },
+    {
+      "name": "Mount Diablo Webcam",
+      "location": "Channel Islands National Park",
+      "type": "youtube",
+      "videoId": "f5Rjm5tiEkU"
+    },
+    {
+      "name": "Elk Prairie at Prairie Creek Redwoods State Park",
+      "location": "Redwood National and State Parks",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-redw/Elk_Prairie.jpg"
+    },
+    {
+      "name": "Visitor Center",
+      "location": "Lava Beds National Monument",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-labe/cam42.jpg"
+    },
+    {
+      "name": "Kohm Yah-mah-nee Visitor Center Webcam",
+      "location": "Lassen Volcanic National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-lavo/kyvc_webcam1.jpg"
+    },
+    {
+      "name": "Badger Pass Ski Area",
+      "location": "Yosemite National Park",
+      "type": "img",
+      "url": "https://pixelcaster.com/aramark/yosemite-ski.jpg"
+    }
+  ],
+  "CO": [
+    {
+      "name": "Longs Peak",
+      "location": "Rocky Mountain National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-romo/longs_peak.jpg"
+    },
+    {
+      "name": "Moraine Park Meadow",
+      "location": "Rocky Mountain National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-romo/moraine_park.jpg"
+    },
+    {
+      "name": "Rocky Mountain Elk",
+      "location": "Estes Park, Colorado",
+      "type": "youtube",
+      "videoId": "JumhPSNd6qA"
+    },
+    {
+      "name": "Alpine Visitor Center",
+      "location": "Rocky Mountain National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-romo/alpine_visitor_center.jpg"
+    },
+    {
+      "name": "Kawuneeche Valley",
+      "location": "Rocky Mountain National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-romo/kawuneeche_valley.jpeg"
+    },
+    {
+      "name": "Continental Divide",
+      "location": "Rocky Mountain National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-romo/glacier_basin.jpeg"
+    },
+    {
+      "name": "Fall River Entrance/U.S. Hwy 34",
+      "location": "Rocky Mountain National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-romo/fre.jpg"
+    },
+    {
+      "name": "Beaver Meadows Entrance/U.S. Hwy 36",
+      "location": "Rocky Mountain National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-romo/bme.jpeg"
+    },
+    {
+      "name": "Grand Lake Entrance/ U.S. Hwy 34",
+      "location": "Rocky Mountain National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-romo/Grand_Lake_Entrance.jpg"
+    },
+    {
+      "name": "Split Mountain",
+      "location": "Dinosaur National Monument",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-dino/quarrycamera.jpg"
+    },
+    {
+      "name": "Elk Creek Webcam",
+      "location": "Curecanti National Recreation Area",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-cure/eccg.jpg"
+    }
+  ],
+  "CT": [
+    {
+      "name": "Hammonasset Beach State Park",
+      "location": "Madison, Connecticut",
+      "type": "youtube",
+      "videoId": "QxmBEVIqJkA"
+    },
+    {
+      "name": "Great Blue Heron Colony",
+      "location": "Connecticut Audubon Society",
+      "type": "iframe",
+      "url": "https://explore.org/livecams/birds/great-blue-heron-cam"
+    }
+  ],
+  "DE": [
+    {
+      "name": "Bombay Hook NWR Shorebirds",
+      "location": "Bombay Hook NWR, Delaware",
+      "type": "youtube",
+      "videoId": "y5GikYMReqY"
+    },
+    {
+      "name": "Cape Henlopen State Park",
+      "location": "Lewes, Delaware",
+      "type": "youtube",
+      "videoId": "JqCkG9kzHrE"
+    }
+  ],
+  "FL": [
+    {
+      "name": "Anhinga Trail",
+      "location": "Everglades National Park",
+      "type": "iframe",
+      "url": "https://www.video-monitoring.com/everglades/royalpalm/"
+    },
+    {
+      "name": "Southwest Florida Eagle Cam",
+      "location": "Southwest Florida",
+      "type": "youtube",
+      "videoId": "hs_Q99GpRxA"
+    },
+    {
+      "name": "Blue Spring Manatees",
+      "location": "Blue Spring State Park, Florida",
+      "type": "youtube",
+      "videoId": "6LOKIbpRWQM"
+    },
+    {
+      "name": "Florida Backyard Bird Feeder",
+      "location": "Central Florida",
+      "type": "youtube",
+      "videoId": "dsT-QZsS71k"
+    }
+  ],
+  "GA": [
+    {
+      "name": "Okefenokee Swamp Wildlife",
+      "location": "Okefenokee National Wildlife Refuge",
+      "type": "youtube",
+      "videoId": "JEHWm4K_IYI"
+    },
+    {
+      "name": "Cumberland Island Beach",
+      "location": "Cumberland Island National Seashore",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-cuis/beach.jpg"
+    }
+  ],
+  "HI": [
+    {
+      "name": "Halemaʻumaʻu Crater",
+      "location": "Hawaiʻi Volcanoes National Park",
+      "type": "img",
+      "url": "https://volcanoes.usgs.gov/cams/V2cam/images/M.jpg"
+    },
+    {
+      "name": "Kīlauea Eruption Live",
+      "location": "Hawaiʻi Volcanoes National Park",
+      "type": "youtube",
+      "videoId": "jBv3FHMOTdA"
+    },
+    {
+      "name": "Laysan Albatross Nesting",
+      "location": "Kīlauea Point NWR, Kauaʻi",
+      "type": "iframe",
+      "url": "https://explore.org/livecams/birds/laysan-albatross-nesting-cam"
+    }
+  ],
+  "IA": [
+    {
+      "name": "Decorah Eagles North Nest",
+      "location": "Decorah, Iowa",
+      "type": "iframe",
+      "url": "https://explore.org/livecams/raptor-resource-project/decorah-eagles-north-nest"
+    },
+    {
+      "name": "Decorah Eagle Hatchery Cam",
+      "location": "Decorah, Iowa",
+      "type": "iframe",
+      "url": "https://explore.org/livecams/raptor-resource-project/decorah-eagles-hatchery-cam"
+    }
+  ],
+  "ID": [
+    {
+      "name": "Craters of the Moon",
+      "location": "Craters of the Moon National Monument",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-crmo/visitor_center.jpg"
+    },
+    {
+      "name": "Snake River Birds of Prey",
+      "location": "Snake River Birds of Prey NCA, Idaho",
+      "type": "youtube",
+      "videoId": "fEhDeMF_xBo"
+    }
+  ],
+  "IL": [
+    {
+      "name": "Bald Eagle Watch",
+      "location": "Starved Rock State Park, Illinois",
+      "type": "youtube",
+      "videoId": "YvhvVRiIJmE"
+    },
+    {
+      "name": "Chicago Lakefront",
+      "location": "Chicago, Illinois",
+      "type": "youtube",
+      "videoId": "k1eHm0PNnjo"
+    }
+  ],
+  "IN": [
+    {
+      "name": "Indiana Dunes Lakeshore",
+      "location": "Indiana Dunes National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-indu/west_beach.jpg"
+    },
+    {
+      "name": "Jasper-Pulaski Sandhill Cranes",
+      "location": "Jasper-Pulaski FWA, Indiana",
+      "type": "youtube",
+      "videoId": "YBWAP3oY3hs"
+    }
+  ],
+  "KS": [
+    {
+      "name": "Tallgrass Prairie Bison",
+      "location": "Tallgrass Prairie National Preserve",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-tapr/bison_pasture.jpg"
+    },
+    {
+      "name": "Quivira Wetlands Wildlife",
+      "location": "Quivira NWR, Kansas",
+      "type": "youtube",
+      "videoId": "1bPSMGQz0gU"
+    }
+  ],
+  "KY": [
+    {
+      "name": "Mammoth Cave Historic Entrance",
+      "location": "Mammoth Cave National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-maca/historic_entrance.jpg"
+    },
+    {
+      "name": "Red River Gorge Overlook",
+      "location": "Daniel Boone National Forest, Kentucky",
+      "type": "youtube",
+      "videoId": "jM8bWPiJNIc"
+    }
+  ],
+  "LA": [
+    {
+      "name": "Roseate Spoonbill Colony",
+      "location": "Atchafalaya Basin, Louisiana",
+      "type": "youtube",
+      "videoId": "HMVEbpFMRpA"
+    },
+    {
+      "name": "Bayou Sauvage Wildlife",
+      "location": "Bayou Sauvage NWR, Louisiana",
+      "type": "youtube",
+      "videoId": "TtRqijxYRKQ"
+    }
+  ],
+  "MA": [
+    {
+      "name": "Race Point Beach",
+      "location": "Cape Cod National Seashore",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-caco/race_point.jpg"
+    },
+    {
+      "name": "Stellwagen Bank Whale Cam",
+      "location": "Stellwagen Bank National Marine Sanctuary",
+      "type": "youtube",
+      "videoId": "sSyMOEeJhQs"
+    },
+    {
+      "name": "Dorchester Heights Monument - Looking South",
+      "location": "Boston National Historical Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-bost/south-001.jpeg"
+    },
+    {
+      "name": "Dorchester Heights Monument - Looking North",
+      "location": "Boston National Historical Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-bost/north-001.jpeg"
+    },
+    {
+      "name": "Dorchester Heights Monument - Looking East",
+      "location": "Boston National Historical Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-bost/east-001.jpeg"
+    },
+    {
+      "name": "Dorchester Heights Monument - Looking West",
+      "location": "Boston National Historical Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-bost/west-001.jpeg"
+    },
+    {
+      "name": "Bunker Hill Monument - Looking South",
+      "location": "Boston National Historical Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-bost/se-ts.jpeg"
+    },
+    {
+      "name": "Bunker Hill Monument - Looking East",
+      "location": "Boston National Historical Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-bost/ne-ts.jpeg"
+    },
+    {
+      "name": "Bunker Hill Monument - Looking North",
+      "location": "Boston National Historical Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-bost/nw-ts.jpeg"
+    },
+    {
+      "name": "Bunker Hill Monument - Looking West",
+      "location": "Boston National Historical Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-bost/sw-ts.jpeg"
+    },
+    {
+      "name": "Little Brewster - Boston Light Looking South",
+      "location": "Boston Harbor Islands National Recreation Area",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-boha/south-001.jpeg"
+    },
+    {
+      "name": "Little Brewster - Boston Light Looking East",
+      "location": "Boston Harbor Islands National Recreation Area",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-boha/east-001.jpeg"
+    },
+    {
+      "name": "Little Brewster - Boston Light Looking North",
+      "location": "Boston Harbor Islands National Recreation Area",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-boha/north-001.jpeg"
+    },
+    {
+      "name": "Little Brewster - Boston Light Looking West",
+      "location": "Boston Harbor Islands National Recreation Area",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-boha/west-001.jpeg"
+    }
+  ],
+  "MD": [
+    {
+      "name": "Assateague Wild Ponies",
+      "location": "Assateague Island National Seashore",
+      "type": "youtube",
+      "videoId": "FTWPUH2m0gg"
+    },
+    {
+      "name": "Chesapeake Bay Osprey",
+      "location": "Eastern Shore, Maryland",
+      "type": "iframe",
+      "url": "https://explore.org/livecams/birds/chesapeake-bay-osprey-cam"
+    }
+  ],
+  "ME": [
+    {
+      "name": "Jordan Pond",
+      "location": "Acadia National Park",
+      "type": "img",
+      "url": "https://barharborcam.com/webcams/jordanpond/jordanpond.jpg"
+    },
+    {
+      "name": "Atlantic Puffin Watch",
+      "location": "Seal Island NWR, Maine",
+      "type": "iframe",
+      "url": "https://explore.org/livecams/birds/puffin-watch"
+    },
+    {
+      "name": "Cadillac Mountain Summit",
+      "location": "Acadia National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-acad/cadillac_summit.jpg"
+    },
+    {
+      "name": "Eye on Acadia",
+      "location": "Acadia National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-acad/eye.jpg"
+    }
+  ],
+  "MI": [
+    {
+      "name": "Miners Beach, Lake Superior",
+      "location": "Pictured Rocks National Lakeshore",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-piro/miners_beach.jpg"
+    },
+    {
+      "name": "Common Loon Nesting Cam",
+      "location": "Upper Peninsula, Michigan",
+      "type": "youtube",
+      "videoId": "H8lxqKwSGm4"
+    },
+    {
+      "name": "Isle Royale Wolf & Moose",
+      "location": "Isle Royale National Park",
+      "type": "youtube",
+      "videoId": "9F8-TroYALE"
+    },
+    {
+      "name": "Windigo Webcam",
+      "location": "Isle Royale National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-isro/WashingtonHarbor.jpg"
+    },
+    {
+      "name": "Mott Island Southwest Webcam",
+      "location": "Isle Royale National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-isro/mottsw.jpg"
+    },
+    {
+      "name": "Middle Islands Passage Webcam",
+      "location": "Isle Royale National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-isro/middleislands.jpg"
+    },
+    {
+      "name": "Greenstone Ridge Northeast Webcam",
+      "location": "Isle Royale National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-isro/greenstoneridgene.jpg"
+    },
+    {
+      "name": "North Shore Webcam",
+      "location": "Isle Royale National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-isro/northshore.jpg"
+    },
+    {
+      "name": "Tobin Harbor Webcam",
+      "location": "Isle Royale National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-isro/tobinseaplanelz.jpg"
+    },
+    {
+      "name": "Rock Harbor Webcam",
+      "location": "Isle Royale National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-isro/tobin.jpg"
+    },
+    {
+      "name": "Greenstone Ridge Southwest Webcam",
+      "location": "Isle Royale National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-isro/GreenstoneRidgeSW.jpg"
+    },
+    {
+      "name": "Mott Island Dock",
+      "location": "Isle Royale National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-isro/mottmain.jpg"
+    },
+    {
+      "name": "Smithwick Channel Webcam",
+      "location": "Isle Royale National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-isro/smithwick.jpg"
+    }
+  ],
+  "MN": [
+    {
+      "name": "Boundary Waters Wildlife",
+      "location": "BWCAW, Minnesota",
+      "type": "youtube",
+      "videoId": "lGqiO6rFGbg"
+    },
+    {
+      "name": "Common Loon Live Cam",
+      "location": "Northwoods, Minnesota",
+      "type": "youtube",
+      "videoId": "H8lxqKwSGm4"
+    },
+    {
+      "name": "Voyageurs National Park",
+      "location": "International Falls, Minnesota",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-voya/kabetogama_lake.jpg"
+    }
+  ],
+  "MO": [
+    {
+      "name": "Gateway Arch Riverfront",
+      "location": "St. Louis, Missouri",
+      "type": "youtube",
+      "videoId": "j6gRt2cElV8"
+    },
+    {
+      "name": "Current River, Ozarks",
+      "location": "Ozark National Scenic Riverways",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-ozar/current_river.jpg"
+    }
+  ],
+  "MS": [
+    {
+      "name": "Gulf Islands National Seashore",
+      "location": "Ocean Springs, Mississippi",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-guis/ship_island.jpg"
+    },
+    {
+      "name": "Noxubee Refuge Wildlife",
+      "location": "Noxubee NWR, Mississippi",
+      "type": "youtube",
+      "videoId": "g07Yzt39bMw"
+    }
+  ],
+  "MT": [
+    {
+      "name": "Lake McDonald",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/LakeMcDonald1.jpg"
+    },
+    {
+      "name": "Logan Pass",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://glacier.org/webcam/hlt_nps.jpg"
+    },
+    {
+      "name": "Grizzly & Wolf Discovery Center",
+      "location": "West Yellowstone, Montana",
+      "type": "youtube",
+      "videoId": "pWn0rQhfKpg"
+    },
+    {
+      "name": "Apgar Mountain",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/ApgarLookout-01.jpg"
+    },
+    {
+      "name": "Apgar Village",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/ApgarVillage.jpg"
+    },
+    {
+      "name": "Park Headquarters",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/Headquarters.jpg"
+    },
+    {
+      "name": "Middle Fork of the Flathead River",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/MiddleForkBridge.jpg"
+    },
+    {
+      "name": "St. Mary Visitor Center",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/StMaryPTZ.jpg"
+    },
+    {
+      "name": "Logan Pass Parking Lot",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/loganpark.jpg"
+    },
+    {
+      "name": "Logan Pass Parking Lot",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://glacier.org/webcam/lpp_nps.jpg"
+    },
+    {
+      "name": "West Entrance",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/WestEntrance.jpg"
+    },
+    {
+      "name": "Two Medicine 1",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/TwoMedicine.jpg"
+    },
+    {
+      "name": "Two Medicine PTZ",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/TwoMedicinePTZ.jpg"
+    },
+    {
+      "name": "Apgar 2",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/ApgarVillagePTZ.jpg"
+    },
+    {
+      "name": "Lake McDonald - 2",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/lakemcdonaldptz.jpg"
+    },
+    {
+      "name": "Glacier Night Sky Webcam",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/stmaryallsky-resize.jpg"
+    },
+    {
+      "name": "St. Mary Visitor Center - Dusty Star Observatory Sky Cam",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://glacier.org/webcam/dark_sky_nps.jpg"
+    },
+    {
+      "name": "Apgar Visitor Center Plaza",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-glac/ApgarVisitorCenter.jpg"
+    },
+    {
+      "name": "Logan Pass 2",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://glacier.org/webcam/smv_nps.jpg"
+    },
+    {
+      "name": "Many Glacier",
+      "location": "Glacier National Park",
+      "type": "img",
+      "url": "https://glacier.org/webcam/mg_nps.jpg"
+    }
+  ],
+  "NC": [
+    {
+      "name": "Cape Hatteras Lighthouse",
+      "location": "Cape Hatteras National Seashore",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-caha/cape_hatteras.jpg"
+    },
+    {
+      "name": "Blue Ridge Parkway Overlook",
+      "location": "Blue Ridge Parkway, North Carolina",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-blri/pinn.jpg"
+    },
+    {
+      "name": "Black Bear Watch",
+      "location": "Great Smoky Mountains National Park",
+      "type": "youtube",
+      "videoId": "uH3PlVeHqbA"
+    }
+  ],
+  "ND": [
+    {
+      "name": "Painted Canyon Overlook",
+      "location": "Theodore Roosevelt National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-thro/painted_canyon.jpg"
+    },
+    {
+      "name": "Prairie Bison Herd",
+      "location": "Theodore Roosevelt National Park",
+      "type": "youtube",
+      "videoId": "FZ_wElxWjUw"
+    }
+  ],
+  "NE": [
+    {
+      "name": "Sandhill Crane Migration",
+      "location": "Rowe Sanctuary, Platte River",
+      "type": "youtube",
+      "videoId": "wDYrRVUPWRo"
+    },
+    {
+      "name": "Crane Cam, Wood River",
+      "location": "Wood River, Nebraska",
+      "type": "youtube",
+      "videoId": "v8fD2_YCi50"
+    }
+  ],
+  "NH": [
+    {
+      "name": "Mount Washington Summit",
+      "location": "White Mountains, New Hampshire",
+      "type": "img",
+      "url": "https://www.mountwashington.org/images/obs/webcam/current.jpg"
+    },
+    {
+      "name": "Squam Lake Loon Cam",
+      "location": "Squam Lake, New Hampshire",
+      "type": "youtube",
+      "videoId": "GNNlxPmj3HA"
+    }
+  ],
+  "NJ": [
+    {
+      "name": "Cape May Hawk Watch",
+      "location": "Cape May Point State Park, New Jersey",
+      "type": "youtube",
+      "videoId": "1fVVNJHE6FE"
+    },
+    {
+      "name": "Forsythe NWR Shorebirds",
+      "location": "Edwin B. Forsythe NWR, New Jersey",
+      "type": "youtube",
+      "videoId": "yPUCCEfQqiE"
+    }
+  ],
+  "NM": [
+    {
+      "name": "White Sands Dunes Drive",
+      "location": "White Sands National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-whsa/dunes_drive.jpg"
+    },
+    {
+      "name": "Bosque del Apache Cranes",
+      "location": "Bosque del Apache NWR, New Mexico",
+      "type": "youtube",
+      "videoId": "piNxmqjQuoM"
+    },
+    {
+      "name": "Valle Grande from the Cabin District",
+      "location": "Valles Caldera National Preserve",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-vall/valle_grande_cabin_webcam.jpg"
+    },
+    {
+      "name": "Carlsbad Caverns Natural Entrance Camera",
+      "location": "Carlsbad Caverns National Park",
+      "type": "youtube",
+      "videoId": "BwiIsjXt3KI"
+    }
+  ],
+  "NV": [
+    {
+      "name": "Lehman Caves Entrance",
+      "location": "Great Basin National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-grba/lehman_caves.jpg"
+    },
+    {
+      "name": "Lake Tahoe South Shore",
+      "location": "Lake Tahoe, Nevada",
+      "type": "youtube",
+      "videoId": "xY_Z1_L2ohs"
+    }
+  ],
+  "NY": [
+    {
+      "name": "Times Square",
+      "location": "New York City",
+      "type": "youtube",
+      "videoId": "rnXIjl_Rzy4"
+    },
+    {
+      "name": "Niagara Falls",
+      "location": "Niagara Falls, NY",
+      "type": "youtube",
+      "videoId": "qx7gry390YA"
+    },
+    {
+      "name": "Red-tailed Hawk Nest",
+      "location": "Cornell Lab of Ornithology, Ithaca",
+      "type": "iframe",
+      "url": "https://explore.org/livecams/birds/cornell-lab-of-ornithology-red-tailed-hawk"
+    },
+    {
+      "name": "Cornell Lab FeederWatch Cam",
+      "location": "Sapsucker Woods, Ithaca, New York",
+      "type": "youtube",
+      "videoId": "x10vL6_47Dw"
+    }
+  ],
+  "OH": [
+    {
+      "name": "Cuyahoga Valley Towpath",
+      "location": "Cuyahoga Valley National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-cuva/station.jpg"
+    },
+    {
+      "name": "Ottawa NWR Shorebirds",
+      "location": "Ottawa National Wildlife Refuge, Ohio",
+      "type": "youtube",
+      "videoId": "6ORd9fPIi5E"
+    },
+    {
+      "name": "Live Bird Feeder Cam",
+      "location": "Ohio",
+      "type": "youtube",
+      "videoId": "OIqUka8BOS8"
+    }
+  ],
+  "OK": [
+    {
+      "name": "Wichita Mountains Bison & Longhorn",
+      "location": "Wichita Mountains NWR, Oklahoma",
+      "type": "youtube",
+      "videoId": "C6JGNKAyEEM"
+    },
+    {
+      "name": "Tallgrass Prairie Preserve",
+      "location": "Pawhuska, Oklahoma",
+      "type": "youtube",
+      "videoId": "0tEO5xEdCFc"
+    }
+  ],
+  "OR": [
+    {
+      "name": "Sinnott Memorial Overlook",
+      "location": "Crater Lake National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-crla/camerasinnott.jpg"
+    },
+    {
+      "name": "Steller Sea Lion Colony",
+      "location": "Sea Lion Caves, Florence",
+      "type": "youtube",
+      "videoId": "f2OTFUKGMdk"
+    },
+    {
+      "name": "Three Arch Rocks Seabirds",
+      "location": "Three Arch Rocks NWR, Oregon",
+      "type": "youtube",
+      "videoId": "p8-cUSFRPHI"
+    },
+    {
+      "name": "Steel Information Center",
+      "location": "Crater Lake National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-crla/cameraHQ0.jpg"
+    },
+    {
+      "name": "Annie Spring Entrance Station",
+      "location": "Crater Lake National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-crla/camera0.jpg"
+    }
+  ],
+  "PA": [
+    {
+      "name": "Hawk Mountain Raptor Watch",
+      "location": "Hawk Mountain Sanctuary, Pennsylvania",
+      "type": "youtube",
+      "videoId": "L-V2Lw5plcs"
+    },
+    {
+      "name": "Pennsylvania Bald Eagle Nest",
+      "location": "Codorus State Park, Pennsylvania",
+      "type": "youtube",
+      "videoId": "hs_Q99GpRxA"
+    },
+    {
+      "name": " LIVE Bird Feeder & Wildlife Cam",
+      "location": "Gettysburg, PA",
+      "type": "youtube",
+      "videoId": "y9t1g8Ike6g"
+    }
+  ],
+  "RI": [
+    {
+      "name": "Newport Harbor",
+      "location": "Newport, Rhode Island",
+      "type": "youtube",
+      "videoId": "D7cTaGW0k2Y"
+    },
+    {
+      "name": "Block Island Wildlife Refuge",
+      "location": "Block Island NWR, Rhode Island",
+      "type": "youtube",
+      "videoId": "h5YEFsmDNF0"
+    }
+  ],
+  "SC": [
+    {
+      "name": "ACE Basin Alligators & Wading Birds",
+      "location": "ACE Basin NWR, South Carolina",
+      "type": "youtube",
+      "videoId": "qpAfbIxR62s"
+    },
+    {
+      "name": "Cape Romain Shorebirds",
+      "location": "Cape Romain NWR, South Carolina",
+      "type": "youtube",
+      "videoId": "K2uqrFHDEFk"
+    }
+  ],
+  "SD": [
+    {
+      "name": "Badlands Prairie Dog Town",
+      "location": "Badlands National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-badl/prairie_dog.jpg"
+    },
+    {
+      "name": "Custer State Park Bison",
+      "location": "Custer State Park, South Dakota",
+      "type": "youtube",
+      "videoId": "6rNQOmJFpBc"
+    }
+  ],
+  "TN": [
+    {
+      "name": "Newfound Gap",
+      "location": "Great Smoky Mountains National Park",
+      "type": "iframe",
+      "url": "https://grsmnfgap.air-resource.net/"
+    },
+    {
+      "name": "Smokies Black Bear Cam",
+      "location": "Great Smoky Mountains National Park",
+      "type": "youtube",
+      "videoId": "uH3PlVeHqbA"
+    },
+    {
+      "name": "Kuwohi Webcam",
+      "location": "Great Smoky Mountains National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/featurecontent/ard/webcams/images/grcdlarge.jpg"
+    },
+    {
+      "name": "Purchase Knob Webcam",
+      "location": "Great Smoky Mountains National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/featurecontent/ard/webcams/images/grpklarge.jpg"
+    },
+    {
+      "name": "Look Rock Webcam",
+      "location": "Great Smoky Mountains National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/featurecontent/ard/webcams/images/grsmlarge.jpg"
+    },
+    {
+      "name": "Newfound Gap Webcam",
+      "location": "Great Smoky Mountains National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/featurecontent/ard/webcams/images/gsnglarge.jpg"
+    }
+  ],
+  "TX": [
+    {
+      "name": "Panther Junction",
+      "location": "Big Bend National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/featurecontent/ard/webcams/images/bibelarge.jpg"
+    },
+    {
+      "name": "Aransas Whooping Cranes",
+      "location": "Aransas NWR, Texas",
+      "type": "youtube",
+      "videoId": "Rl6_HRkXmYY"
+    },
+    {
+      "name": "High Island Heron & Egret Colony",
+      "location": "High Island, Texas",
+      "type": "youtube",
+      "videoId": "6gFijBIq1uM"
+    },
+    {
+      "name": "El Capitan View",
+      "location": "Guadalupe Mountains National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-gumo/gumo2.jpg"
+    },
+    {
+      "name": "Diablo East Rampa de Barco - Amistad National Recreation Area",
+      "location": "Amistad National Recreation Area",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-amis/camera0.jpg"
+    },
+    {
+      "name": "Dog Canyon View",
+      "location": "Guadalupe Mountains National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-gumo/gumo3.jpg"
+    },
+    {
+      "name": "Pine Springs Canyon View",
+      "location": "Guadalupe Mountains National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-gumo/gumo1.jpg"
+    },
+    {
+      "name": "Padre Island National Seashore- Malaquite Beach",
+      "location": "Padre Island National Seashore",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-pais/camera.jpg"
+    },
+    {
+      "name": "McKittrick Canyon View",
+      "location": "Guadalupe Mountains National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-gumo/gumo4.jpg"
+    }
+  ],
+  "UT": [
+    {
+      "name": "Temples and Towers of the Virgin",
+      "location": "Zion National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-zion/camera2.jpg"
+    },
+    {
+      "name": "Arches Entrance",
+      "location": "Arches National Park",
+      "type": "img",
+      "url": "https://udottraffic.utah.gov/1_devices/aux16852.jpeg"
+    },
+    {
+      "name": "Bryce Canyon Sunrise Point",
+      "location": "Bryce Canyon National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-brca/sunrise.jpg"
+    },
+    {
+      "name": "South Gate Entrance",
+      "location": "Zion National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-zion/southgate.jpg"
+    },
+    {
+      "name": "Entrance Station Webcam",
+      "location": "Arches National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-arch/arch_traffic.jpg"
+    }
+  ],
+  "VA": [
+    {
+      "name": "Big Meadows",
+      "location": "Shenandoah National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-shen/bvc2.jpg"
+    },
+    {
+      "name": "Chincoteague Wild Ponies",
+      "location": "Chincoteague NWR, Virginia",
+      "type": "youtube",
+      "videoId": "FTWPUH2m0gg"
+    }
+  ],
+  "VT": [
+    {
+      "name": "Mount Mansfield Summit",
+      "location": "Stowe Mountain Resort, Vermont",
+      "type": "img",
+      "url": "https://www.stowe.com/content/dam/stowe/images/mountain/MtMansfieldSummitWebcam.jpg"
+    },
+    {
+      "name": "Vermont Common Loon",
+      "location": "Groton Pond, Vermont",
+      "type": "youtube",
+      "videoId": "GNNlxPmj3HA"
+    }
+  ],
+  "WA": [
+    {
+      "name": "Mountain View",
+      "location": "Mount Rainier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-mora/mountain.jpg"
+    },
+    {
+      "name": "Longmire",
+      "location": "Mount Rainier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-mora/longmire.jpg"
+    },
+    {
+      "name": "Tatoosh Range",
+      "location": "Mount Rainier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-mora/tatoosh.jpg"
+    },
+    {
+      "name": "Orca Live — Salish Sea",
+      "location": "San Juan Island, Washington",
+      "type": "youtube",
+      "videoId": "nEMhPnjT350"
+    },
+    {
+      "name": "Hurricane Ridge",
+      "location": "Olympic National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-olym/southcam.jpg"
+    },
+    {
+      "name": "Hurricane Ridge Parking Lot",
+      "location": "Olympic National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-olym/hrparkinglot.jpg"
+    },
+    {
+      "name": "East",
+      "location": "Mount Rainier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-mora/east.jpg"
+    },
+    {
+      "name": "Visitor Center",
+      "location": "Mount Rainier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-mora/gh.jpg"
+    },
+    {
+      "name": "West",
+      "location": "Mount Rainier National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-mora/west.jpg"
+    }
+  ],
+  "WI": [
+    {
+      "name": "Apostle Islands Sea Caves",
+      "location": "Apostle Islands National Lakeshore",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-apis/sea_caves.jpg"
+    },
+    {
+      "name": "Sandhill Crane Festival",
+      "location": "International Crane Foundation, Baraboo",
+      "type": "youtube",
+      "videoId": "RwXv4TCkK_Q"
+    },
+    {
+      "name": "Northwoods Black Bear Cam",
+      "location": "Northwoods, Wisconsin",
+      "type": "youtube",
+      "videoId": "pWn0rQhfKpg"
+    }
+  ],
+  "WV": [
+    {
+      "name": "New River Gorge Grand View",
+      "location": "New River Gorge National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-neri/grandview.jpg"
+    },
+    {
+      "name": "Cranberry Glades Wildlife",
+      "location": "Monongahela National Forest, WV",
+      "type": "youtube",
+      "videoId": "aCNHgbZLtk0"
+    },
+    {
+      "name": "Canyon Rim Webcam",
+      "location": "New River Gorge National Park & Preserve",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-neri/image.jpg"
+    }
+  ],
+  "WY": [
+    {
+      "name": "Old Faithful Geyser",
+      "location": "Yellowstone National Park",
+      "type": "youtube",
+      "videoId": "BWnloy8r0qU"
+    },
+    {
+      "name": "Mammoth Hot Springs",
+      "location": "Yellowstone National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-yell/mammoth_parade.jpg"
+    },
+    {
+      "name": "West Entrance",
+      "location": "Yellowstone National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-yell/west_gate.jpg"
+    },
+    {
+      "name": "Grand Teton Oxbow Bend",
+      "location": "Grand Teton National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-grte/oxbow.jpg"
+    },
+    {
+      "name": "Current view from the Craig Thomas Discovery & Visitor Center in Moose, WY",
+      "location": "Grand Teton National Park",
+      "type": "youtube",
+      "videoId": "XhBUrjhJm1A"
+    },
+    {
+      "name": "Mount Washburn - Northeastern View",
+      "location": "Yellowstone National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-yell/washburn_ne.jpg"
+    },
+    {
+      "name": "North Entrance - Electric Peak",
+      "location": "Yellowstone National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-yell/mammoth_electric.jpg"
+    },
+    {
+      "name": "North Entrance - Out of the Park",
+      "location": "Yellowstone National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-yell/mammoth_arch.jpg"
+    },
+    {
+      "name": "West Entrance - Into the Park",
+      "location": "Yellowstone National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-yell/west_into.jpg"
+    },
+    {
+      "name": "Mount Washburn - Southern View",
+      "location": "Yellowstone National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-yell/washburn_sw.jpg"
+    },
+    {
+      "name": "East Entrance - Out of Park",
+      "location": "Yellowstone National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-yell/east_out.jpg"
+    },
+    {
+      "name": "East Entrance - Into Park",
+      "location": "Yellowstone National Park",
+      "type": "img",
+      "url": "https://www.nps.gov/webcams-yell/east_in.jpg"
+    }
+  ]
+}
