@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
 """
-Scrape NPS webcams via the public Solr API and expand webcams.json.
+Scrape webcams from NPS (National Park Service) and SpotCameras and expand webcams.json.
 
 Usage:
-    python3 scrape_webcams.py           # fetch all 292 NPS webcams
-    python3 scrape_webcams.py --dry-run # print results without writing
-    python3 scrape_webcams.py --limit N # process only first N cams
-
-No Selenium required — the NPS Solr endpoint is publicly accessible.
+    python3 scrape_webcams.py                      # fetch all NPS webcams
+    python3 scrape_webcams.py --source spotcameras  # fetch NY cams from spotcameras.com
+    python3 scrape_webcams.py --dry-run             # print results without writing
+    python3 scrape_webcams.py --limit N             # process only first N cams
 
 PLEASE USE RESPONSIBLY
 -----------------------
-This script queries nps.gov, a U.S. government public service. Please:
+This script queries public websites. Please:
   - Run it infrequently (updates are rarely needed more than once a month).
   - Do not remove or reduce the per-request delay (time.sleep below).
   - Do not run multiple instances in parallel.
   - Use --limit during development to avoid unnecessary load.
-  - Do not redistribute or commercialize data obtained from nps.gov.
-NPS webcam images and content remain the property of the National Park
-Service and are subject to their terms of use: https://www.nps.gov/aboutus/disclaimer.htm
+  - Do not redistribute or commercialize data obtained from these sources.
+NPS webcam images remain the property of the National Park Service:
+  https://www.nps.gov/aboutus/disclaimer.htm
+SpotCameras content is subject to spotcameras.com terms of use.
 """
 
 import argparse
@@ -162,6 +162,64 @@ SOLR_FIELDS = (
     "Type,Title,Parks,PageURL,Image_URL,Abstract"
 )
 
+# ── SpotCameras config ─────────────────────────────────────────────────────
+SPOTCAMERAS_BASE = "https://spotcameras.com"
+
+# Mapping of US state/territory abbreviation → SpotCameras listing URL path
+SPOTCAMERAS_STATES = {
+    "AL": "/en/cams/United-States/Alabama",
+    "AK": "/en/cams/United-States/Alaska",
+    "AZ": "/en/cams/United-States/Arizona",
+    "AR": "/en/cams/United-States/Arkansas",
+    "CA": "/en/cams/United-States/California",
+    "CO": "/en/cams/United-States/Colorado",
+    "CT": "/en/cams/United-States/Connecticut",
+    "DE": "/en/cams/United-States/Delaware",
+    "DC": "/en/cams/United-States/District-of-Columbia",
+    "FL": "/en/cams/United-States/Florida",
+    "GA": "/en/cams/United-States/Georgia",
+    "HI": "/en/cams/United-States/Hawaii",
+    "ID": "/en/cams/United-States/Idaho",
+    "IL": "/en/cams/United-States/Illinois",
+    "IN": "/en/cams/United-States/Indiana",
+    "IA": "/en/cams/United-States/Iowa",
+    "KS": "/en/cams/United-States/Kansas",
+    "KY": "/en/cams/United-States/Kentucky",
+    "LA": "/en/cams/United-States/Louisiana",
+    "ME": "/en/cams/United-States/Maine",
+    "MD": "/en/cams/United-States/Maryland",
+    "MA": "/en/cams/United-States/Massachusetts",
+    "MI": "/en/cams/United-States/Michigan",
+    "MN": "/en/cams/United-States/Minnesota",
+    "MS": "/en/cams/United-States/Mississippi",
+    "MO": "/en/cams/United-States/Missouri",
+    "MT": "/en/cams/United-States/Montana",
+    "NE": "/en/cams/United-States/Nebraska",
+    "NV": "/en/cams/United-States/Nevada",
+    "NH": "/en/cams/United-States/New-Hampshire",
+    "NJ": "/en/cams/United-States/New-Jersey",
+    "NM": "/en/cams/United-States/New-Mexico",
+    "NY": "/en/cams/United-States/New-York",
+    "NC": "/en/cams/United-States/North-Carolina",
+    "ND": "/en/cams/United-States/North-Dakota",
+    "OH": "/en/cams/United-States/Ohio",
+    "OK": "/en/cams/United-States/Oklahoma",
+    "OR": "/en/cams/United-States/Oregon",
+    "PA": "/en/cams/United-States/Pennsylvania",
+    "RI": "/en/cams/United-States/Rhode-Island",
+    "SC": "/en/cams/United-States/South-Carolina",
+    "SD": "/en/cams/United-States/South-Dakota",
+    "TN": "/en/cams/United-States/Tennessee",
+    "TX": "/en/cams/United-States/Texas",
+    "UT": "/en/cams/United-States/Utah",
+    "VT": "/en/cams/United-States/Vermont",
+    "VA": "/en/cams/United-States/Virginia",
+    "WA": "/en/cams/United-States/Washington",
+    "WV": "/en/cams/United-States/West-Virginia",
+    "WI": "/en/cams/United-States/Wisconsin",
+    "WY": "/en/cams/United-States/Wyoming",
+}
+
 SESSION = requests.Session()
 SESSION.headers["User-Agent"] = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -277,6 +335,81 @@ def fetch_live_url(view_url):
     return None
 
 
+# ── SpotCameras scraping ───────────────────────────────────────────────────
+
+def fetch_spotcameras_listing(state_path):
+    """
+    Return list of (detail_url, description, thumb_url) for all cams on a
+    SpotCameras state listing page. All data comes from the single listing
+    request — no per-cam detail fetches needed.
+    """
+    url = SPOTCAMERAS_BASE + state_path
+    r = SESSION.get(url, timeout=20)
+    r.raise_for_status()
+    soup = BeautifulSoup(r.text, "html.parser")
+    results = []
+    for item in soup.find_all("div", class_="cbp-item"):
+        a = item.find("a", href=True)
+        desc_div = item.find("div", class_="cbp-l-grid-agency-desc")
+        img = item.find("img", src=True)
+        if a and desc_div and img:
+            results.append((a["href"], desc_div.get_text(strip=True), img["src"]))
+    return results
+
+
+def run_spotcameras(args, existing, existing_keys):
+    """Scrape SpotCameras and return (new_by_state dict, skipped count)."""
+    new_by_state = {}
+    skipped = 0
+
+    for state, path in SPOTCAMERAS_STATES.items():
+        print(f"\nFetching SpotCameras listing for {state}: {SPOTCAMERAS_BASE + path}")
+        try:
+            cams = fetch_spotcameras_listing(path)
+        except Exception as e:
+            print(f"  ERROR fetching listing: {e}")
+            continue
+
+        if args.limit:
+            cams = cams[: args.limit]
+
+        total = len(cams)
+        print(f"  Found {total} cams on listing page")
+
+        for i, (detail_path, description, thumb_src) in enumerate(cams, 1):
+            prefix = f"  [{i:3}/{total}]"
+
+            # Parse name / location from "City, County, State, Country - View description"
+            if " - " in description:
+                location, view = description.split(" - ", 1)
+                name = f"{location} - {view}"
+            else:
+                location = description
+                name = description
+
+            img_url = (
+                thumb_src if thumb_src.startswith("http")
+                else SPOTCAMERAS_BASE + thumb_src
+            )
+
+            key = img_url
+            if key in existing_keys:
+                print(f"{prefix} SKIP (duplicate) — {name[:55]}")
+                continue
+
+            cam_entry = {
+                "name": name,
+                "location": location,
+                "type": "img",
+                "url": img_url,
+            }
+            new_by_state.setdefault(state, []).append(cam_entry)
+            existing_keys.add(key)
+            print(f"{prefix} {state}  {name[:55]}")
+
+    return new_by_state, skipped
+
+
 # ── State resolution ───────────────────────────────────────────────────────
 
 def state_from_park(park_name):
@@ -293,6 +426,8 @@ def state_from_park(park_name):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--source", choices=["nps", "spotcameras"], default="nps",
+                    help="Data source: nps (default) or spotcameras")
     ap.add_argument("--dry-run", action="store_true",
                     help="Print results without writing webcams.json")
     ap.add_argument("--limit", type=int, default=0,
@@ -311,54 +446,57 @@ def main():
         for c in cams
     }
 
-    print("Querying NPS Solr API for webcams…")
-    docs = fetch_all_webcams()
+    if args.source == "spotcameras":
+        new_by_state, skipped = run_spotcameras(args, existing, existing_keys)
+    else:
+        print("Querying NPS Solr API for webcams…")
+        docs = fetch_all_webcams()
 
-    if args.limit:
-        docs = docs[: args.limit]
+        if args.limit:
+            docs = docs[: args.limit]
 
-    new_by_state = {}
-    skipped = 0
-    total = len(docs)
+        new_by_state = {}
+        skipped = 0
+        total = len(docs)
 
-    for i, doc in enumerate(docs, 1):
-        title    = doc.get("Title", "NPS Webcam")
-        park     = doc.get("Parks", "")
-        page_url = doc.get("PageURL", "")
+        for i, doc in enumerate(docs, 1):
+            title    = doc.get("Title", "NPS Webcam")
+            park     = doc.get("Parks", "")
+            page_url = doc.get("PageURL", "")
 
-        state = state_from_park(park)
+            state = state_from_park(park)
 
-        prefix = f"[{i:3}/{total}]"
+            prefix = f"[{i:3}/{total}]"
 
-        if not state:
-            print(f"{prefix} SKIP (no state) — {park or title}")
-            skipped += 1
-            continue
+            if not state:
+                print(f"{prefix} SKIP (no state) — {park or title}")
+                skipped += 1
+                continue
 
-        if not page_url:
-            print(f"{prefix} SKIP (no URL) — {title}")
-            skipped += 1
-            continue
+            if not page_url:
+                print(f"{prefix} SKIP (no URL) — {title}")
+                skipped += 1
+                continue
 
-        print(f"{prefix} {state}  {title[:55]}")
+            print(f"{prefix} {state}  {title[:55]}")
 
-        cam_data = fetch_live_url(page_url)
-        if not cam_data:
-            print(f"         └─ no live URL found")
-            skipped += 1
-            continue
+            cam_data = fetch_live_url(page_url)
+            if not cam_data:
+                print(f"         └─ no live URL found")
+                skipped += 1
+                continue
 
-        key = cam_data.get("url") or cam_data.get("videoId")
-        if key in existing_keys:
-            print(f"         └─ already in webcams.json")
-            continue
+            key = cam_data.get("url") or cam_data.get("videoId")
+            if key in existing_keys:
+                print(f"         └─ already in webcams.json")
+                continue
 
-        cam_entry = {"name": title, "location": park, **cam_data}
-        new_by_state.setdefault(state, []).append(cam_entry)
-        existing_keys.add(key)
-        print(f"         └─ {cam_data['type']}: {key[:80]}")
+            cam_entry = {"name": title, "location": park, **cam_data}
+            new_by_state.setdefault(state, []).append(cam_entry)
+            existing_keys.add(key)
+            print(f"         └─ {cam_data['type']}: {key[:80]}")
 
-        time.sleep(0.15)  # be polite to nps.gov
+            time.sleep(0.15)  # be polite to nps.gov
 
     # ── Merge ──────────────────────────────────────────────────────────────
     merged = dict(existing)
@@ -376,7 +514,6 @@ def main():
 
     if args.dry_run:
         print("(dry run — nothing written)")
-        # Show what would be added
         for st, cams in sorted(new_by_state.items()):
             for c in cams:
                 key = c.get("url") or c.get("videoId", "")
